@@ -1,0 +1,48 @@
+<view class="container page-with-bottom-bar" wx:if="{{item}}">
+  <view class="card">
+    <view class="flex-between">
+      <text class="detail-title">{{item.name}}</text>
+      <text class="fav-btn" bindtap="toggleFav">{{favorited ? '⭐' : '☆'}}</text>
+    </view>
+    <view class="card-tags">
+      <text class="tag tag-blue">{{item.category}}</text>
+      <text class="tag tag-green" wx:for="{{item.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+    <text class="detail-intro">{{item.intro}}</text>
+  </view>
+
+  <media-display images="{{item.images}}" video-url="{{item.videoUrl}}" video-poster="{{item.videoPoster}}" image-title="工厂实拍" video-title="厂区视频" />
+
+  <view class="card">
+    <text class="section-title">工厂信息</text>
+    <view class="info-row"><text class="info-label">业务类型</text><text>{{item.bizTypes.join('、')}}</text></view>
+    <view class="info-row"><text class="info-label">起订量</text><text>{{item.moq}}</text></view>
+    <view class="info-row"><text class="info-label">所在地区</text><text>{{item.region}}</text></view>
+    <view class="info-row"><text class="info-label">产能</text><text>{{item.capacity}}</text></view>
+    <view class="info-row"><text class="info-label">资质认证</text><text>{{item.cert}}</text></view>
+    <view class="info-row"><text class="info-label">样品政策</text><text>{{item.samplePolicy}}</text></view>
+  </view>
+
+  <!-- 联系方式（会员权限） -->
+  <view class="card">
+    <text class="section-title">联系方式</text>
+    <block wx:if="{{isMember}}">
+      <view class="info-row"><text class="info-label">电话</text><text>{{item.phone}}</text></view>
+      <view class="info-row"><text class="info-label">微信</text><text>{{item.wechat}}</text></view>
+      <view class="contact-btns">
+        <button class="btn-primary contact-btn" bindtap="callPhone">一键拨号</button>
+        <button class="btn-outline contact-btn" bindtap="copyWechat">复制微信</button>
+      </view>
+    </block>
+    <view class="contact-lock" wx:else>
+      <text class="lock-icon">🔒</text>
+      <text class="lock-text">联系方式仅会员可见</text>
+      <button class="btn-gold" bindtap="goMember">开通会员查看</button>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <button class="btn-outline bar-btn" bindtap="leaveMessage">留言沟通</button>
+    <button class="btn-primary bar-btn" bindtap="{{isMember ? 'callPhone' : 'goMember'}}">{{isMember ? '立即联系' : '开通会员联系'}}</button>
+  </view>
+</view>

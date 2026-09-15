@@ -1,0 +1,16 @@
+<view class="container">
+  <scroll-view scroll-x class="tab-scroll">
+    <text class="tab-item {{activePlatform === index ? 'active' : ''}}" wx:for="{{platforms}}" wx:key="*this" bindtap="filterPlatform" data-index="{{index}}">{{item}}</text>
+  </scroll-view>
+
+  <view class="card list-card" wx:for="{{list}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+    <view class="flex-between">
+      <text class="card-title">{{item.name}}</text>
+      <text class="tag tag-blue">{{item.platform}}</text>
+    </view>
+    <text class="card-meta">粉丝 {{item.fans}} · {{item.category}}</text>
+    <text class="card-mode">合作模式：{{item.mode}}</text>
+    <view class="card-intro ellipsis">{{item.intro}}</view>
+  </view>
+  <view class="fab" bindtap="goPublish">+ 发布招募</view>
+</view>

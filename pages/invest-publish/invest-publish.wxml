@@ -1,0 +1,84 @@
+<view class="container">
+  <view class="tip-card card">
+    <text>发布融资/合作项目，上传 BP 资料便于投资方了解项目详情</text>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="card form-group">
+    <text class="section-title">项目信息</text>
+    <view class="form-item">
+      <text class="form-label">项目名称 *</text>
+      <input placeholder="如：智能宠物健康监测项圈" value="{{form.name}}" bindinput="onInput" data-field="name" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">联系方式 *</text>
+      <input placeholder="手机号或微信号" value="{{form.contact}}" bindinput="onInput" data-field="contact" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">融资需求 *</text>
+      <input placeholder="如：寻求500万融资、战略投资" value="{{form.need}}" bindinput="onInput" data-field="need" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">项目赛道</text>
+      <input placeholder="如：智能硬件、线下服务、电商" value="{{form.track}}" bindinput="onInput" data-field="track" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">融资阶段</text>
+      <input placeholder="如：天使轮、A轮、Pre-A" value="{{form.stage}}" bindinput="onInput" data-field="stage" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">项目简介</text>
+      <textarea placeholder="简要介绍项目亮点、团队、进展等" value="{{form.intro}}" bindinput="onInput" data-field="intro" />
+    </view>
+  </view>
+
+  <!-- 文件上传 -->
+  <view class="card">
+    <text class="section-title">BP 资料上传</text>
+    <text class="upload-tip">支持上传商业计划书，便于投资方查阅（选填）</text>
+
+    <!-- PDF 上传 -->
+    <view class="upload-item" bindtap="chooseFile" data-type="pdf">
+      <view class="upload-left">
+        <view class="upload-icon-wrap pdf">
+          <text class="upload-icon">PDF</text>
+        </view>
+        <view class="upload-info">
+          <text class="upload-name">{{pdfFile ? pdfFile.name : '上传 PDF 文件'}}</text>
+          <text class="upload-desc">{{pdfFile ? '点击重新选择' : '商业计划书、项目介绍等'}}</text>
+        </view>
+      </view>
+      <text class="upload-action">{{pdfFile ? '更换' : '选择'}}</text>
+    </view>
+    <view class="file-remove" wx:if="{{pdfFile}}" bindtap="removeFile" data-type="pdf">
+      <text>移除 PDF 文件</text>
+    </view>
+
+    <!-- PPT 上传 -->
+    <view class="upload-item" bindtap="chooseFile" data-type="ppt">
+      <view class="upload-left">
+        <view class="upload-icon-wrap ppt">
+          <text class="upload-icon">PPT</text>
+        </view>
+        <view class="upload-info">
+          <text class="upload-name">{{pptFile ? pptFile.name : '上传 PPT 文件'}}</text>
+          <text class="upload-desc">{{pptFile ? '点击重新选择' : '路演PPT、项目演示文稿等'}}</text>
+        </view>
+      </view>
+      <text class="upload-action">{{pptFile ? '更换' : '选择'}}</text>
+    </view>
+    <view class="file-remove" wx:if="{{pptFile}}" bindtap="removeFile" data-type="ppt">
+      <text>移除 PPT 文件</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">项目图文视频（选填）</text>
+    <text class="upload-tip">上传产品演示图/视频，便于投资方快速了解项目</text>
+    <media-upload max-images="{{6}}" image-label="上传项目图片" video-label="上传项目视频" bind:change="onMediaChange" />
+  </view>
+
+  <view class="submit-wrap">
+    <button class="btn-primary submit-btn" bindtap="submit">发布项目</button>
+  </view>
+</view>

@@ -1,0 +1,37 @@
+<view class="container page-with-bottom-bar" wx:if="{{item}}">
+  <view class="card">
+    <text class="detail-title">{{item.name}}</text>
+    <text class="tag tag-blue">{{item.platform}}</text>
+    <text class="detail-meta">粉丝 {{item.fans}} · {{item.category}}</text>
+    <text class="detail-intro">{{item.intro}}</text>
+  </view>
+
+  <media-display images="{{item.images}}" video-url="{{item.videoUrl}}" video-poster="{{item.videoPoster}}" image-title="达人作品" video-title="代表视频" />
+
+  <view class="card">
+    <text class="section-title">合作信息</text>
+    <view class="info-row"><text class="info-label">合作模式</text><text>{{item.mode}}</text></view>
+    <view class="info-row"><text class="info-label">合作案例</text><text>{{item.cases}}</text></view>
+    <view class="info-row"><text class="info-label">可接品类</text><text>{{item.products}}</text></view>
+  </view>
+  <view class="card">
+    <text class="section-title">达人联系方式</text>
+    <block wx:if="{{isMember}}">
+      <view class="info-row"><text class="info-label">电话</text><text>{{item.phone}}</text></view>
+      <view class="info-row"><text class="info-label">微信</text><text>{{item.wechat}}</text></view>
+      <view class="contact-btns">
+        <button class="btn-primary contact-btn" bindtap="callPhone">一键拨号</button>
+        <button class="btn-outline contact-btn" bindtap="copyWechat">复制微信</button>
+      </view>
+    </block>
+    <view class="contact-lock" wx:else>
+      <text class="lock-icon">🔒</text>
+      <text class="lock-text">达人联系方式仅会员可见</text>
+      <button class="btn-gold" bindtap="goMember">开通会员查看</button>
+    </view>
+  </view>
+  <view class="bottom-bar">
+    <button class="btn-outline bar-btn" bindtap="leaveMessage">留言沟通</button>
+    <button class="btn-primary bar-btn" bindtap="{{isMember ? 'callPhone' : 'goMember'}}">{{isMember ? '联系达人' : '开通会员'}}</button>
+  </view>
+</view>

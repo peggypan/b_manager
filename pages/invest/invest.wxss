@@ -1,0 +1,63 @@
+.tab-bar {
+  display: flex;
+  background: #fff;
+  margin: 0 24rpx 16rpx;
+  border-radius: 12rpx;
+  padding: 8rpx;
+  box-shadow: 0 2rpx 12rpx rgba(26, 86, 219, 0.06);
+}
+.tab-item {
+  flex: 1;
+  text-align: center;
+  font-size: 28rpx;
+  color: #64748B;
+  padding: 16rpx 0;
+  border-radius: 8rpx;
+}
+.tab-item.active {
+  background: #7C3AED;
+  color: #fff;
+  font-weight: bold;
+}
+
+.card-title { font-size: 32rpx; font-weight: bold; display: block; margin-bottom: 12rpx; }
+.card-need { font-size: 26rpx; color: #D97706; font-weight: 500; display: block; margin: 8rpx 0; }
+.card-intro { font-size: 26rpx; color: #64748B; }
+.fab {
+  position: fixed;
+  right: 32rpx;
+  bottom: 120rpx;
+  background: #7C3AED;
+  color: #fff;
+  padding: 20rpx 32rpx;
+  border-radius: 44rpx;
+  font-size: 28rpx;
+}
+
+.service-card { overflow: hidden; padding: 0; }
+.service-img { width: 100%; height: 280rpx; }
+.service-info { padding: 20rpx 24rpx; }
+.service-name { font-size: 32rpx; font-weight: bold; display: block; }
+.service-desc { font-size: 26rpx; color: #64748B; display: block; margin: 8rpx 0; }
+.service-price { font-size: 32rpx; color: #0EA5E9; font-weight: bold; }
+.book-link { font-size: 26rpx; color: #1A56DB; }
+.service-cases { font-size: 24rpx; color: #94A3B8; display: block; margin-top: 8rpx; }
+
+.influencer-tip { background: #EFF6FF; font-size: 26rpx; color: #1E40AF; line-height: 1.5; }
+.platform-scroll { white-space: nowrap; padding: 16rpx 24rpx; }
+.platform-item {
+  display: inline-block;
+  padding: 8rpx 24rpx;
+  margin-right: 12rpx;
+  font-size: 26rpx;
+  color: #64748B;
+  border-radius: 24rpx;
+  background: #fff;
+}
+.platform-item.active { background: #EFF6FF; color: #1A56DB; font-weight: bold; }
+
+.influencer-name { font-size: 32rpx; font-weight: bold; }
+.influencer-meta { font-size: 24rpx; color: #94A3B8; display: block; margin: 8rpx 0; }
+.influencer-mode { font-size: 26rpx; color: #1A56DB; display: block; margin-bottom: 8rpx; }
+.influencer-intro { font-size: 26rpx; color: #64748B; display: block; }
+.influencer-cases { font-size: 24rpx; color: #94A3B8; display: block; margin-top: 8rpx; }

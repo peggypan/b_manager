@@ -1,0 +1,60 @@
+<view class="container">
+  <view class="tip-card card">
+    <text class="tip-title">工厂发布 · 门店一件代发货源</text>
+    <text class="tip-text">标记「一件起批，工厂直发」，面向线下宠物店老板。平台不做线上交易，仅撮合对接。</text>
+    <view class="fixed-tags">
+      <text class="supply-tag">一件起批</text>
+      <text class="supply-tag">工厂直发</text>
+    </view>
+  </view>
+
+  <view class="card form-group">
+    <view class="form-item">
+      <text class="form-label">产品名称 *</text>
+      <input placeholder="如：鲜肉无谷狗粮 2kg" bindinput="onInput" data-field="name" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">产品品类 *</text>
+      <picker range="{{categories}}" bindchange="selectCategory">
+        <view class="picker">{{form.category || '请选择品类'}} ></view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">供货单价 *</text>
+      <input type="digit" placeholder="元/件，一件起批价" bindinput="onInput" data-field="price" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">产地</text>
+      <input placeholder="如：山东烟台" bindinput="onInput" data-field="origin" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">规格</text>
+      <input placeholder="如：2kg/袋" bindinput="onInput" data-field="specs" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">库存情况</text>
+      <input placeholder="如：现货充足 / 3天到货" bindinput="onInput" data-field="stock" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">发货时效</text>
+      <input placeholder="如：24小时内发货" bindinput="onInput" data-field="delivery" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">售后说明</text>
+      <input placeholder="退换货政策" bindinput="onInput" data-field="afterSale" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">产品简介</text>
+      <textarea placeholder="介绍产品卖点、代发政策" bindinput="onInput" data-field="intro" />
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">素材上传</text>
+    <media-upload max-images="{{6}}" image-label="产品实拍图" video-label="车间短视频" bind:change="onMediaChange" />
+  </view>
+
+  <view class="submit-wrap">
+    <button class="btn-primary" bindtap="submit">发布货源</button>
+  </view>
+</view>

@@ -1,0 +1,39 @@
+<view class="container page-with-bottom-bar" wx:if="{{item}}">
+  <view class="card">
+    <text class="detail-title">{{item.title}}</text>
+    <text class="detail-sub">{{item.factoryName}} · {{item.type}}</text>
+    <text class="detail-intro">{{item.intro}}</text>
+  </view>
+
+  <media-display images="{{item.images}}" video-url="{{item.videoUrl}}" video-poster="{{item.videoPoster}}" image-title="产品图片" video-title="产品视频" />
+
+  <view class="card">
+    <text class="section-title">详细信息</text>
+    <view class="info-row"><text class="info-label">品类</text><text>{{item.category}}</text></view>
+    <view class="info-row"><text class="info-label">起订量</text><text>{{item.moq}}</text></view>
+    <view class="info-row"><text class="info-label">报价</text><text>{{item.price}}</text></view>
+    <view class="info-row"><text class="info-label">交付周期</text><text>{{item.delivery}}</text></view>
+    <view class="info-row"><text class="info-label">产品参数</text><text>{{item.params}}</text></view>
+    <view class="info-row"><text class="info-label">合作案例</text><text>{{item.cases}}</text></view>
+  </view>
+  <view class="card">
+    <text class="section-title">联系方式</text>
+    <block wx:if="{{isMember}}">
+      <view class="info-row"><text class="info-label">电话</text><text>{{item.phone}}</text></view>
+      <view class="info-row"><text class="info-label">微信</text><text>{{item.wechat}}</text></view>
+      <view class="contact-btns">
+        <button class="btn-primary contact-btn" bindtap="callPhone">一键拨号</button>
+        <button class="btn-outline contact-btn" bindtap="copyWechat">复制微信</button>
+      </view>
+    </block>
+    <view class="contact-lock" wx:else>
+      <text class="lock-icon">🔒</text>
+      <text class="lock-text">联系方式仅会员可见</text>
+      <button class="btn-gold" bindtap="goMember">开通会员查看</button>
+    </view>
+  </view>
+  <view class="bottom-bar">
+    <button class="btn-outline bar-btn" bindtap="leaveMessage">留言沟通</button>
+    <button class="btn-primary bar-btn" bindtap="{{isMember ? 'callPhone' : 'goMember'}}">{{isMember ? '立即联系' : '开通会员'}}</button>
+  </view>
+</view>

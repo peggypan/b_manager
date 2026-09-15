@@ -1,0 +1,6 @@
+.banner-img { width: 100%; height: 320rpx; }
+.detail-title { font-size: 34rpx; font-weight: bold; display: block; margin-bottom: 8rpx; }
+.fav-btn { font-size: 40rpx; }
+.detail-intro { font-size: 28rpx; color: #64748B; line-height: 1.6; margin-top: 16rpx; display: block; }
+.info-row { display: flex; padding: 12rpx 0; border-bottom: 1rpx solid #F8FAFC; font-size: 28rpx; }
+.info-label { width: 160rpx; color: #94A3B8; flex-shrink: 0; }

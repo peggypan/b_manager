@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "发布项目",
+  "usingComponents": {
+    "media-upload": "/components/media-upload/media-upload"
+  }
+}

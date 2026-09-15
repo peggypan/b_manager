@@ -1,0 +1,56 @@
+<view class="container">
+  <view class="tip-card card">
+    <text class="tip-title">免费入驻</text>
+    <text class="tip-text">产业园、商协会均可免费入驻展示。审核通过后上线名片，联系方式需开通会员后对其他企业可见。</text>
+  </view>
+
+  <view class="card form-group">
+    <view class="form-item">
+      <text class="form-label">主体名称 *</text>
+      <input placeholder="产业园或商协会全称" value="{{form.name}}" bindinput="onInput" data-field="name" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">主体类型 *</text>
+      <picker range="{{types}}" bindchange="selectType">
+        <view class="picker">{{form.type || '请选择产业园 / 商协会'}} ></view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">所在地区</text>
+      <input placeholder="如：广东佛山、北京" value="{{form.region}}" bindinput="onInput" data-field="region" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">规模介绍</text>
+      <input placeholder="如：500亩·入驻企业80+、会员3000+" value="{{form.scale}}" bindinput="onInput" data-field="scale" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">机构简介</text>
+      <textarea placeholder="介绍产业定位、服务优势、合作方向" value="{{form.intro}}" bindinput="onInput" data-field="intro" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">主要服务</text>
+      <input placeholder="如：厂房租赁、政策扶持、行业培训" value="{{form.products}}" bindinput="onInput" data-field="products" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">资质认证</text>
+      <input placeholder="如：省级产业园、民政部登记" value="{{form.cert}}" bindinput="onInput" data-field="cert" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">联系人 *</text>
+      <input placeholder="联系人姓名" value="{{form.contact}}" bindinput="onInput" data-field="contact" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">联系电话</text>
+      <input type="number" placeholder="联系电话" value="{{form.phone}}" bindinput="onInput" data-field="phone" />
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">机构展示（选填）</text>
+    <media-upload max-images="{{6}}" image-label="上传实景图片" video-label="上传宣传视频" bind:change="onMediaChange" />
+  </view>
+
+  <view class="submit-wrap">
+    <button class="btn-primary" bindtap="submit">提交入驻申请</button>
+  </view>
+</view>

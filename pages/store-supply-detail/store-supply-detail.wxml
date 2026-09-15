@@ -1,0 +1,77 @@
+<view class="container page-with-bottom-bar" wx:if="{{item}}">
+  <!-- 封面/视频 -->
+  <view class="cover-section">
+    <video wx:if="{{showProductVideo && item.videoUrl}}" class="cover-video" src="{{item.videoUrl}}" autoplay controls poster="{{item.videoCover || item.image}}" />
+    <image wx:else class="cover-img" src="{{item.image}}" mode="aspectFill" />
+    <view class="play-btn" wx:if="{{item.hasVideo && !showProductVideo}}" bindtap="playProductVideo">▶ 播放产品视频</view>
+  </view>
+
+  <view class="card">
+    <text class="detail-name">{{item.name}}</text>
+    <view class="detail-tags">
+      <text class="supply-tag">一件起批</text>
+      <text class="supply-tag">工厂直发</text>
+      <text class="supply-tag stock" wx:if="{{item.inStock}}">现货</text>
+    </view>
+    <view class="price-row">
+      <text class="price-symbol">¥</text>
+      <text class="price-int">{{item.price}}</text>
+      <text class="moq-text">/ 起批{{item.moq}}件 · {{item.origin}}</text>
+    </view>
+    <text class="detail-intro">{{item.intro}}</text>
+  </view>
+
+  <!-- 产品参数 -->
+  <view class="card">
+    <text class="section-title">产品信息</text>
+    <view class="info-row"><text class="info-label">规格</text><text>{{item.specs}}</text></view>
+    <view class="info-row"><text class="info-label">库存</text><text>{{item.stock}}</text></view>
+    <view class="info-row"><text class="info-label">发货时效</text><text>{{item.delivery}}</text></view>
+    <view class="info-row"><text class="info-label">售后说明</text><text>{{item.afterSale}}</text></view>
+    <view class="info-row"><text class="info-label">产品参数</text><text>{{item.params}}</text></view>
+  </view>
+
+  <!-- 素材区 -->
+  <view class="card">
+    <text class="section-title">产品实拍</text>
+    <scroll-view scroll-x class="media-scroll">
+      <image class="media-img" wx:for="{{item.images}}" wx:key="*this" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-url="{{item}}" />
+    </scroll-view>
+    <view class="workshop-video" wx:if="{{item.workshopVideo}}">
+      <text class="section-sub">工厂车间视频</text>
+      <video class="workshop-player" src="{{item.workshopVideo}}" controls poster="{{item.images[0]}}" />
+    </view>
+  </view>
+
+  <!-- 供货工厂 -->
+  <view class="card factory-card" bindtap="goFactory">
+    <text class="section-title">供货工厂</text>
+    <view class="flex-between">
+      <view>
+        <text class="factory-name">{{item.factoryName}}</text>
+        <text class="factory-region">📍 {{item.origin}}</text>
+      </view>
+      <text class="factory-link">查看工厂 ></text>
+    </view>
+  </view>
+
+  <!-- 对接入口 -->
+  <view class="card">
+    <text class="section-title">对接工厂</text>
+    <text class="match-tip">平台仅做撮合，订单发货结算由门店与工厂线下沟通</text>
+    <block wx:if="{{isMember}}">
+      <view class="info-row"><text class="info-label">电话</text><text>{{item.phone}}</text></view>
+      <view class="info-row"><text class="info-label">微信</text><text>{{item.wechat}}</text></view>
+    </block>
+    <view class="contact-lock" wx:else>
+      <text class="lock-icon">🔒</text>
+      <text class="lock-text">联系方式仅会员可见</text>
+      <button class="btn-gold" bindtap="goMember">开通会员查看</button>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <button class="btn-outline bar-btn" bindtap="consultDropship">咨询代发政策</button>
+    <button class="btn-primary bar-btn" bindtap="{{isMember ? 'callFactory' : 'goMember'}}">{{isMember ? '联系工厂拿货' : '开通会员联系'}}</button>
+  </view>
+</view>

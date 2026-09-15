@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="card">
+    <view class="form-item">
+      <text class="form-label">分类</text>
+      <picker range="{{categories}}" bindchange="selectCategory">
+        <view class="picker">{{category}} ></view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">标题（选填）</text>
+      <input placeholder="给笔记起个标题" value="{{title}}" bindinput="onInput" data-field="title" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">正文 *</text>
+      <textarea placeholder="分享行业动态、投资资讯、新闻观点…" value="{{content}}" bindinput="onInput" data-field="content" maxlength="2000" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">话题标签（选填）</text>
+      <input placeholder="如：猫经济,融资,门店运营" value="{{tags}}" bindinput="onInput" data-field="tags" />
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">图片 / 视频 *</text>
+    <media-upload max-images="{{9}}" image-label="添加图片" video-label="添加视频" bind:change="onMediaChange" />
+  </view>
+
+  <view class="submit-wrap">
+    <button class="btn-primary" bindtap="submit">发布笔记</button>
+  </view>
+</view>

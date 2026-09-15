@@ -1,0 +1,42 @@
+<view class="container page-with-bottom-bar" wx:if="{{item}}">
+  <view class="card">
+    <text class="detail-name">{{item.title}}</text>
+    <view class="detail-tags">
+      <text class="demand-tag">门店求购</text>
+      <text class="demand-tag category">{{item.category}}</text>
+      <text class="demand-tag dropship" wx:if="{{item.dropship}}">需一件代发</text>
+    </view>
+    <text class="detail-meta">{{item.storeName}} · {{item.region}} · {{item.time}}</text>
+    <text class="detail-intro">{{item.intro}}</text>
+  </view>
+
+  <view class="card">
+    <text class="section-title">需求详情</text>
+    <view class="info-row"><text class="info-label">采购品类</text><text>{{item.category}}</text></view>
+    <view class="info-row"><text class="info-label">采购量级</text><text>{{item.quantity}}</text></view>
+    <view class="info-row"><text class="info-label">所在地区</text><text>{{item.region}}</text></view>
+    <view class="info-row"><text class="info-label">代发需求</text><text>{{item.dropship ? '支持一件代发' : '批发采购'}}</text></view>
+    <view class="info-row"><text class="info-label">详细说明</text><text>{{item.detail}}</text></view>
+  </view>
+
+  <media-display images="{{item.images}}" video-url="{{item.videoUrl}}" video-poster="{{item.videoPoster}}" image-title="样品参考图" video-title="参考视频" />
+
+  <view class="card">
+    <text class="section-title">联系门店</text>
+    <text class="match-tip">平台仅做撮合，订单发货结算由门店与工厂线下沟通</text>
+    <block wx:if="{{isMember}}">
+      <view class="info-row"><text class="info-label">电话</text><text>{{item.phone}}</text></view>
+      <view class="info-row"><text class="info-label">微信</text><text>{{item.wechat}}</text></view>
+    </block>
+    <view class="contact-lock" wx:else>
+      <text class="lock-icon">🔒</text>
+      <text class="lock-text">联系方式仅会员可见</text>
+      <button class="btn-gold" bindtap="goMember">开通会员查看</button>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <button class="btn-outline bar-btn" bindtap="{{isMember ? 'copyWechat' : 'goMember'}}">{{isMember ? '复制微信' : '开通会员'}}</button>
+    <button class="btn-primary bar-btn" bindtap="contactStore">{{isMember ? '联系门店供货' : '开通会员联系'}}</button>
+  </view>
+</view>

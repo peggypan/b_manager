@@ -1,0 +1,78 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/market/market",
+    "pages/publish/publish",
+    "pages/community/community",
+    "pages/user/user",
+    "pages/community-post/community-post",
+    "pages/community-detail/community-detail",
+    "pages/store-supply/store-supply",
+    "pages/store-supply-detail/store-supply-detail",
+    "pages/store-supply-publish/store-supply-publish",
+    "pages/store-demand-publish/store-demand-publish",
+    "pages/store-demand-detail/store-demand-detail",
+    "pages/factory/factory",
+    "pages/factory-detail/factory-detail",
+    "pages/factory-publish/factory-publish",
+    "pages/order-market/order-market",
+    "pages/order-detail/order-detail",
+    "pages/invest/invest",
+    "pages/invest-detail/invest-detail",
+    "pages/invest-publish/invest-publish",
+    "pages/influencer/influencer",
+    "pages/influencer-detail/influencer-detail",
+    "pages/directory/directory",
+    "pages/directory-detail/directory-detail",
+    "pages/directory-apply/directory-apply",
+    "pages/media/media",
+    "pages/industry-park/industry-park",
+    "pages/industry-apply/industry-apply",
+    "pages/media-book/media-book",
+    "pages/member/member",
+    "pages/search/search",
+    "pages/favorites/favorites",
+    "pages/messages/messages",
+    "pages/company/company",
+    "pages/publish-edit/publish-edit"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1A56DB",
+    "navigationBarTitleText": "宠投投",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F0F4F8"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#94A3B8",
+    "selectedColor": "#1A56DB",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/market/market",
+        "text": "供需市场"
+      },
+      {
+        "pagePath": "pages/publish/publish",
+        "text": "发布"
+      },
+      {
+        "pagePath": "pages/community/community",
+        "text": "宠业社区"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

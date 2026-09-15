@@ -1,0 +1,26 @@
+<view class="container">
+  <view class="tab-bar">
+    <text class="tab-item {{activeTab === index ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="*this" bindtap="switchTab" data-index="{{index}}">{{item}}</text>
+  </view>
+
+  <block wx:if="{{activeTab === 0}}">
+    <view class="card list-card" wx:for="{{orders}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <text class="card-title">{{item.title}}</text>
+      <text class="card-sub">{{item.factoryName}} · {{item.type}}</text>
+      <view class="card-meta-row">
+        <text class="tag tag-blue">{{item.category}}</text>
+        <text class="meta-text">起订 {{item.moq}} · {{item.price}}</text>
+      </view>
+      <view class="card-intro ellipsis">{{item.intro}}</view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <view class="card list-card" wx:for="{{demands}}" wx:key="id">
+      <text class="card-title">{{item.title}}</text>
+      <text class="card-sub">{{item.company}} · {{item.time}}</text>
+      <view class="card-intro ellipsis-2">{{item.intro}}</view>
+      <button class="msg-btn" bindtap="goDetail" data-id="1">留言沟通</button>
+    </view>
+  </block>
+</view>

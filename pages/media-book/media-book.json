@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "服务预约",
+  "usingComponents": {
+    "media-upload": "/components/media-upload/media-upload"
+  }
+}

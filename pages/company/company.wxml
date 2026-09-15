@@ -1,0 +1,24 @@
+<view class="container">
+  <view class="card">
+    <text class="section-title">入驻状态</text>
+    <view class="status-row">
+      <text class="status-label">审核状态</text>
+      <text class="status-value {{company.status}}">{{statusMap[company.status] || '未入驻'}}</text>
+    </view>
+    <view class="status-row" wx:if="{{company.name}}">
+      <text class="status-label">企业名称</text><text>{{company.name}}</text>
+    </view>
+    <view class="status-row" wx:if="{{company.type}}">
+      <text class="status-label">主体类型</text><text>{{company.type}}</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">资质说明</text>
+    <text class="tip-text">入驻需上传营业执照、相关资质证明，后台人工审核通过后展示企业黄页。免费入驻可展示简介，联系方式需开通会员后对其他企业可见。</text>
+  </view>
+
+  <view class="submit-wrap">
+    <button class="btn-primary" bindtap="goApply">{{company.status === 'none' ? '申请入驻' : '修改资料'}}</button>
+  </view>
+</view>

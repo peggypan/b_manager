@@ -1,0 +1,18 @@
+<view class="container">
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索工厂、产品、项目、达人、企业" value="{{keyword}}" bindinput="onInput" confirm-type="search" bindconfirm="doSearch" focus />
+    <text class="search-btn" bindtap="doSearch">搜索</text>
+  </view>
+  <view class="result-list">
+    <view class="result-item card" wx:for="{{results}}" wx:key="url" bindtap="goResult" data-url="{{item.url}}">
+      <view class="flex-between">
+        <view class="result-title ellipsis flex-1">{{item.title}}</view>
+        <text class="tag tag-blue">{{item.type}}</text>
+      </view>
+      <text class="result-sub">{{item.sub}}</text>
+    </view>
+    <view class="empty-state" wx:if="{{searched && results.length === 0}}">
+      <text class="empty-icon">🔍</text><text>未找到相关内容</text>
+    </view>
+  </view>
+</view>

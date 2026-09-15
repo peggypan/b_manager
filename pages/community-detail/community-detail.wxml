@@ -1,0 +1,92 @@
+<view class="page-wrap" wx:if="{{post}}">
+  <scroll-view scroll-y class="content-scroll" scroll-into-view="{{scrollTo}}" scroll-with-animation>
+    <!-- 作者信息 -->
+    <view class="card author-card">
+      <view class="author-row">
+        <image class="author-avatar" src="{{post.avatar}}" mode="aspectFill" />
+        <view class="author-info">
+          <text class="author-name">{{post.author}}</text>
+          <text class="author-time">{{post.time}} · {{post.category}}</text>
+        </view>
+      </view>
+      <view class="post-title">{{post.title}}</view>
+      <view class="post-content">{{post.content}}</view>
+      <view class="tag-row" wx:if="{{post.tags.length}}">
+        <text class="topic-tag" wx:for="{{post.tags}}" wx:key="*this">#{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 图片视频 -->
+    <media-display
+      wx:if="{{post.images.length || post.videoUrl}}"
+      images="{{post.images}}"
+      video-url="{{post.videoUrl}}"
+      video-poster="{{post.videoPoster}}"
+      image-title="笔记图集"
+      video-title="笔记视频"
+    />
+
+    <!-- 互动栏 -->
+    <view class="card action-bar">
+      <view class="action-item" bindtap="toggleLikePost">
+        <text class="action-icon">{{liked ? '❤️' : '🤍'}}</text>
+        <text>{{likeCount}}</text>
+      </view>
+      <view class="action-item">
+        <text class="action-icon">💬</text>
+        <text>{{post.comments}}</text>
+      </view>
+    </view>
+
+    <!-- 评论区 -->
+    <view class="card comment-section">
+      <text class="section-title">评论 {{comments.length}}</text>
+      <view class="comment-item" wx:for="{{comments}}" wx:key="id" id="c{{index}}">
+        <image class="comment-avatar" src="{{item.avatar}}" mode="aspectFill" />
+        <view class="comment-body">
+          <text class="comment-author">{{item.author}}</text>
+          <view class="comment-text" wx:if="{{item.content}}">{{item.content}}</view>
+          <image
+            wx:if="{{item.images.length}}"
+            class="comment-img"
+            src="{{item.images[0]}}"
+            mode="widthFix"
+            bindtap="previewImage"
+            data-url="{{item.images[0]}}"
+          />
+          <text class="comment-time">{{item.time}}</text>
+        </view>
+      </view>
+      <view class="empty-comment" wx:if="{{comments.length === 0}}">
+        <text>暂无评论，来抢沙发吧～</text>
+      </view>
+    </view>
+    <view class="scroll-bottom-spacer"></view>
+  </scroll-view>
+
+  <!-- 底部聊天框 -->
+  <view class="chat-bar">
+    <view class="comment-preview" wx:if="{{commentImage}}">
+      <image class="preview-thumb" src="{{commentImage}}" mode="aspectFill" />
+      <text class="preview-remove" bindtap="removeCommentImage">×</text>
+    </view>
+
+    <view class="emoji-panel" wx:if="{{showEmoji}}">
+      <text class="emoji-item" wx:for="{{emojis}}" wx:key="*this" bindtap="pickEmoji" data-emoji="{{item}}">{{item}}</text>
+    </view>
+
+    <view class="chat-input-row">
+      <view class="tool-btn" bindtap="toggleEmoji">😊</view>
+      <view class="tool-btn" bindtap="chooseCommentImage">📷</view>
+      <input
+        class="chat-input"
+        placeholder="说点什么…"
+        value="{{inputText}}"
+        bindinput="onInput"
+        confirm-type="send"
+        bindconfirm="sendComment"
+      />
+      <view class="send-btn" bindtap="sendComment">发送</view>
+    </view>
+  </view>
+</view>

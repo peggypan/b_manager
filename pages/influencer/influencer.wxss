@@ -1,0 +1,8 @@
+.tab-scroll { white-space: nowrap; background: #fff; padding: 16rpx 24rpx; }
+.tab-item { display: inline-block; padding: 8rpx 24rpx; margin-right: 12rpx; font-size: 26rpx; color: #64748B; border-radius: 24rpx; background: #F1F5F9; }
+.tab-item.active { background: #FDF2F8; color: #EC4899; font-weight: bold; }
+.card-title { font-size: 32rpx; font-weight: bold; }
+.card-meta { font-size: 24rpx; color: #94A3B8; display: block; margin: 8rpx 0; }
+.card-mode { font-size: 26rpx; color: #EC4899; display: block; margin-bottom: 8rpx; }
+.card-intro { font-size: 26rpx; color: #64748B; }
+.fab { position: fixed; right: 32rpx; bottom: 120rpx; background: #EC4899; color: #fff; padding: 20rpx 32rpx; border-radius: 44rpx; font-size: 28rpx; }

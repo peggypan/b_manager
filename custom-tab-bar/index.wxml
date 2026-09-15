@@ -1,0 +1,53 @@
+<!-- 发布弹层 -->
+<view class="publish-mask {{showPublish ? 'show' : ''}}" bindtap="closePublish">
+  <view class="publish-panel" catchtap="noop">
+    <view class="panel-handle"></view>
+
+    <scroll-view scroll-y class="publish-scroll" enhanced show-scrollbar="{{false}}">
+      <text class="section-label">快速发布</text>
+      <view class="quick-grid">
+        <view
+          class="quick-card theme-{{item.theme}} {{item.wide ? 'quick-card-wide' : ''}}"
+          wx:for="{{publishActions}}"
+          wx:key="name"
+          bindtap="goPublishAction"
+          data-url="{{item.url}}"
+        >
+          <view class="quick-card-text">
+            <text class="quick-card-name">{{item.name}}</text>
+            <text class="quick-card-desc">{{item.desc}}</text>
+          </view>
+          <text class="quick-card-art">{{item.icon}}</text>
+        </view>
+      </view>
+
+      <view class="publish-footer" bindtap="goMyPublish">
+        <text>查看我的发布 ></text>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<!-- 底部 TabBar -->
+<view class="tab-bar">
+  <view
+    class="tab-item {{item.isCenter ? 'center-item' : ''}} {{selected === index ? 'active' : ''}}"
+    wx:for="{{list}}"
+    wx:key="text"
+    bindtap="switchTab"
+    data-index="{{index}}"
+  >
+    <view class="center-btn" wx:if="{{item.isCenter}}">
+      <view class="plus-icon">
+        <view class="plus-bar plus-h"></view>
+        <view class="plus-bar plus-v"></view>
+      </view>
+    </view>
+    <block wx:else>
+      <view class="tab-icon-wrap">
+        <image class="tab-icon-img {{selected === index ? 'active' : ''}}" src="{{item.icon}}" mode="aspectFit" />
+      </view>
+      <text class="tab-text">{{item.text}}</text>
+    </block>
+  </view>
+</view>

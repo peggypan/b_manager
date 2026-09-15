@@ -1,0 +1,47 @@
+<view class="container">
+  <view class="media-banner card">
+    <text class="banner-title">📱 新媒体运营推广</text>
+    <text class="banner-desc">代运营服务 + 达人合作，增值服务单独收费</text>
+  </view>
+
+  <!-- Tab 切换 -->
+  <view class="tab-bar">
+    <text class="tab-item {{activeTab === index ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="*this" bindtap="switchTab" data-index="{{index}}">{{item}}</text>
+  </view>
+
+  <!-- 推广服务 -->
+  <block wx:if="{{activeTab === 0}}">
+    <view class="service-card card" wx:for="{{services}}" wx:key="id" bindtap="goBook" data-id="{{item.id}}">
+      <image class="service-img" src="{{item.image}}" mode="aspectFill" />
+      <view class="service-info">
+        <text class="service-name">{{item.name}}</text>
+        <text class="service-desc">{{item.desc}}</text>
+        <view class="flex-between">
+          <text class="service-price">{{item.price}}</text>
+          <text class="book-link">预约咨询 ></text>
+        </view>
+        <text class="service-cases">案例：{{item.cases}}</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- 达人合作 -->
+  <block wx:if="{{activeTab === 1}}">
+    <view class="influencer-tip card">
+      <text>抖音 / 快手 / 小红书宠物达人，品牌分销带货与坑位合作</text>
+    </view>
+    <scroll-view scroll-x class="platform-scroll">
+      <text class="platform-item {{activePlatform === index ? 'active' : ''}}" wx:for="{{platforms}}" wx:key="*this" bindtap="filterPlatform" data-index="{{index}}">{{item}}</text>
+    </scroll-view>
+    <view class="influencer-card card" wx:for="{{influencers}}" wx:key="id" bindtap="goInfluencerDetail" data-id="{{item.id}}">
+      <view class="flex-between">
+        <text class="influencer-name">{{item.name}}</text>
+        <text class="tag tag-blue">{{item.platform}}</text>
+      </view>
+      <text class="influencer-meta">粉丝 {{item.fans}} · {{item.category}}</text>
+      <text class="influencer-mode">合作模式：{{item.mode}}</text>
+      <view class="influencer-intro ellipsis">{{item.intro}}</view>
+      <text class="influencer-cases">案例：{{item.cases}}</text>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,16 @@
+<view class="container">
+  <view class="card form-group">
+    <view class="form-item"><text class="form-label">需求标题 *</text><input placeholder="如：寻找猫主粮OEM工厂" bindinput="onInput" data-field="title" /></view>
+    <view class="form-item"><text class="form-label">品类</text><input placeholder="如：主粮、零食" bindinput="onInput" data-field="category" /></view>
+    <view class="form-item"><text class="form-label">起订量</text><input placeholder="如：1000kg" bindinput="onInput" data-field="moq" /></view>
+    <view class="form-item"><text class="form-label">期望地区</text><input placeholder="如：不限、江浙沪" bindinput="onInput" data-field="region" /></view>
+    <view class="form-item"><text class="form-label">需求描述 *</text><textarea placeholder="详细描述您的采购或贴牌代工需求" bindinput="onInput" data-field="intro" /></view>
+  </view>
+
+  <view class="card media-card">
+    <text class="section-title">参考素材（选填）</text>
+    <media-upload max-images="{{6}}" image-label="上传参考图" video-label="上传参考视频" bind:change="onMediaChange" />
+  </view>
+
+  <view class="submit-wrap"><button class="btn-primary" bindtap="submit">发布需求</button></view>
+</view>

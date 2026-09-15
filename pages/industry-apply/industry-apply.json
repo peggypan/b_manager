@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "产业园·商协会入驻",
+  "usingComponents": {
+    "media-upload": "/components/media-upload/media-upload"
+  }
+}

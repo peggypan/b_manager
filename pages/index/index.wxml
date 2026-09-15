@@ -1,0 +1,66 @@
+<view class="container page-with-tabbar">
+  <!-- 搜索栏 -->
+  <view class="search-bar" bindtap="goSearch">
+    <text class="search-icon">🔍</text>
+    <text class="search-placeholder">搜索工厂、产品、项目、达人、企业</text>
+  </view>
+
+  <!-- 会员提示条 -->
+  <view class="member-bar" wx:if="{{!membership.active}}" bindtap="goMember">
+    <text class="member-bar-icon">👑</text>
+    <text class="member-bar-text">开通企业会员，解锁全平台联系方式</text>
+    <text class="member-bar-btn">去开通 ></text>
+  </view>
+  <view class="member-bar active" wx:else>
+    <text class="member-bar-icon">✅</text>
+    <text class="member-bar-text">{{membership.planName}} · 有效期至 {{membership.expireDate}}</text>
+  </view>
+
+  <!-- Banner -->
+  <swiper class="banner" indicator-dots autoplay circular interval="4000">
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <image class="banner-img" src="{{item.image}}" mode="aspectFill" />
+    </swiper-item>
+  </swiper>
+
+  <!-- 首页模块 · 卡片入口 -->
+  <view class="module-section">
+    <view
+      class="module-card {{item.wide ? 'module-card-wide' : ''}} {{item.noIcon ? 'module-card-plain' : ''}}"
+      wx:for="{{modules}}"
+      wx:key="id"
+      style="background: {{item.bg}};"
+      bindtap="goModule"
+      data-url="{{item.url}}"
+      data-action="{{item.action}}"
+    >
+      <view class="module-card-content">
+        <text class="module-card-title">{{item.name}}</text>
+        <text class="module-card-sub">{{item.subtitle}}</text>
+      </view>
+      <view class="module-decor" wx:if="{{!item.noIcon}}">
+        <view class="module-decor-glow"></view>
+        <view class="module-icon-stack">
+          <text class="module-icon-main">{{item.iconMain}}</text>
+          <text class="module-icon-sub">{{item.iconSub}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 热门需求 -->
+  <view class="card">
+    <view class="flex-between section-header">
+      <text class="section-title" style="margin:0">🔥 热门需求</text>
+      <text class="more-link" bindtap="goModule" data-url="/pages/market/market">更多 ></text>
+    </view>
+    <view class="demand-item" wx:for="{{hotDemands}}" wx:key="id" bindtap="goDemand" data-index="{{index}}">
+      <view class="card-title-row">
+        <view class="demand-title ellipsis">{{item.title}}</view>
+        <text class="tag tag-blue">{{item.category}}</text>
+      </view>
+      <view class="demand-company">{{item.company}} · {{item.time}}</view>
+      <view class="demand-intro ellipsis-2">{{item.intro}}</view>
+    </view>
+  </view>
+</view>

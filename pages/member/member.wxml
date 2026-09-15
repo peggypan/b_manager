@@ -1,0 +1,29 @@
+<view class="container">
+  <view class="member-header">
+    <text class="header-title">👑 企业会员</text>
+    <text class="header-desc">付费解锁全平台B端资源联系方式</text>
+    <text class="current-plan" wx:if="{{membership.active}}">当前：{{membership.planName}} · 至 {{membership.expireDate}}</text>
+  </view>
+
+  <view class="card free-card">
+    <text class="section-title">免费用户权益</text>
+    <view class="rule-item" wx:for="{{freeRules}}" wx:key="*this">
+      <text class="rule-dot">·</text><text>{{item}}</text>
+    </view>
+  </view>
+
+  <view class="plan-card card {{item.recommend ? 'recommend' : ''}}" wx:for="{{plans}}" wx:key="level">
+    <view class="plan-header flex-between">
+      <text class="plan-name">{{item.name}}</text>
+      <view class="plan-price"><text class="price-num">{{item.price}}</text><text class="price-unit">元/{{item.unit}}</text></view>
+    </view>
+    <text class="plan-target">{{item.target}}</text>
+    <view class="plan-features">
+      <text class="feature-item" wx:for="{{item.features}}" wx:for-item="f" wx:key="*this">✓ {{f}}</text>
+    </view>
+    <button class="{{item.level === 'vip' ? 'btn-gold' : 'btn-primary'}} plan-btn" bindtap="buyPlan" data-level="{{item.level}}">
+      {{membership.level === item.level && membership.active ? '续费' : '立即开通'}}
+    </button>
+    <text class="recommend-tag" wx:if="{{item.recommend}}">推荐</text>
+  </view>
+</view>

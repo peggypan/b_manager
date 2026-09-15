@@ -1,0 +1,13 @@
+<view class="container">
+  <view class="card form-group">
+    <view class="form-item"><text class="form-label">{{typeName}}标题 *</text><input placeholder="请输入标题" bindinput="onInput" data-field="title" /></view>
+    <view class="form-item"><text class="form-label">详细描述 *</text><textarea placeholder="请详细描述发布内容" bindinput="onInput" data-field="intro" /></view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">图文视频（选填）</text>
+    <media-upload max-images="{{6}}" image-label="上传图片" video-label="上传视频" bind:change="onMediaChange" />
+  </view>
+
+  <view class="submit-wrap"><button class="btn-primary" bindtap="submit">发布</button></view>
+</view>

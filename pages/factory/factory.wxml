@@ -1,0 +1,27 @@
+<view class="container">
+  <view class="filter-bar">
+    <scroll-view scroll-x class="filter-scroll">
+      <text class="filter-label">品类</text>
+      <text class="filter-item {{filters.category === item ? 'active' : ''}}" wx:for="{{categories}}" wx:key="*this" bindtap="setFilter" data-key="category" data-value="{{item}}">{{item}}</text>
+    </scroll-view>
+    <scroll-view scroll-x class="filter-scroll">
+      <text class="filter-label">业务</text>
+      <text class="filter-item {{filters.bizType === item ? 'active' : ''}}" wx:for="{{bizTypes}}" wx:key="*this" bindtap="setFilter" data-key="bizType" data-value="{{item}}">{{item}}</text>
+    </scroll-view>
+  </view>
+
+  <view class="factory-card card" wx:for="{{list}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+    <text class="card-title">{{item.name}}</text>
+    <view class="card-tags">
+      <text class="tag tag-blue">{{item.category}}</text>
+      <text class="tag tag-green" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
+    </view>
+    <text class="card-meta">起订量 {{item.moq}} · {{item.region}}</text>
+    <view class="card-intro ellipsis-2">{{item.intro}}</view>
+    <view class="card-biz">
+      <text class="biz-tag" wx:for="{{item.bizTypes}}" wx:for-item="b" wx:key="*this">{{b}}</text>
+    </view>
+  </view>
+
+  <view class="fab" bindtap="goPublish">+ 发布需求</view>
+</view>

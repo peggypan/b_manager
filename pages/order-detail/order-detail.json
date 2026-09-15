@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "产品详情",
+  "usingComponents": {
+    "media-display": "/components/media-display/media-display"
+  }
+}

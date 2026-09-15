@@ -1,0 +1,29 @@
+<view class="container page-with-tabbar">
+  <view class="search-wrap">
+    <input class="search-input" placeholder="搜索供需信息" value="{{keyword}}" bindinput="onSearch" />
+  </view>
+
+  <scroll-view scroll-x class="tab-scroll">
+    <view class="tab-item {{activeTab === index ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="*this" bindtap="switchTab" data-index="{{index}}">{{item}}</view>
+  </scroll-view>
+
+  <view class="list-wrap">
+    <view class="list-card card" wx:for="{{list}}" wx:key="_key" bindtap="goDetail" data-type="{{item.listType}}" data-id="{{item.id}}">
+      <view class="card-title-row">
+        <view class="list-title ellipsis">{{item.listTitle}}</view>
+        <text class="tag tag-blue" wx:if="{{item.listType === 'factory'}}">工厂</text>
+        <text class="tag tag-green" wx:if="{{item.listType === 'order'}}">订单</text>
+        <text class="tag tag-gold" wx:if="{{item.listType === 'invest'}}">投资</text>
+        <text class="tag tag-gray" wx:if="{{item.listType === 'influencer'}}">达人</text>
+        <text class="tag tag-blue" wx:if="{{item.listType === 'demand'}}">需求</text>
+        <text class="tag tag-cyan" wx:if="{{item.listType === 'storeDemand'}}">门店求购</text>
+      </view>
+      <view class="list-sub">{{item.listSub}}</view>
+      <view class="list-intro ellipsis-2">{{item.intro}}</view>
+    </view>
+    <view class="empty-state" wx:if="{{list.length === 0}}">
+      <text class="empty-icon">📭</text>
+      <text>暂无相关信息</text>
+    </view>
+  </view>
+</view>

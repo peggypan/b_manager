@@ -1,0 +1,10 @@
+.service-name { font-size: 32rpx; font-weight: bold; display: block; }
+.service-price { font-size: 30rpx; color: #0EA5E9; font-weight: bold; }
+.form-item { padding: 16rpx 0; border-bottom: 1rpx solid #F1F5F9; }
+.form-label { font-size: 28rpx; color: #64748B; display: block; margin-bottom: 8rpx; }
+.form-item input, .form-item textarea { font-size: 30rpx; width: 100%; }
+.form-item textarea { height: 160rpx; }
+.booking-item { padding: 16rpx 0; border-bottom: 1rpx solid #F1F5F9; }
+.booking-name { font-size: 28rpx; display: block; }
+.booking-meta { font-size: 24rpx; color: #94A3B8; }
+.submit-wrap { padding: 40rpx 48rpx; }

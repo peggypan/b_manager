@@ -1,0 +1,5 @@
+.search-bar { display: flex; align-items: center; padding: 16rpx 24rpx; background: #fff; }
+.search-input { flex: 1; background: #F1F5F9; border-radius: 32rpx; padding: 16rpx 24rpx; font-size: 28rpx; }
+.search-btn { margin-left: 16rpx; color: #1A56DB; font-size: 28rpx; font-weight: bold; }
+.result-title { font-size: 30rpx; font-weight: 500; margin-right: 12rpx; display: block; line-height: 1.4; min-width: 0; }
+.result-sub { font-size: 24rpx; color: #94A3B8; display: block; margin-top: 8rpx; }

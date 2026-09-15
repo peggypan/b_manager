@@ -1,0 +1,52 @@
+<view class="container page-with-tabbar">
+  <view class="header-banner card">
+    <text class="banner-title">🏛️ 产业园 · 商协会</text>
+    <text class="banner-desc">宠物产业集聚地与行业组织，一站式资源对接</text>
+  </view>
+
+  <!-- 宠物产业园 -->
+  <view class="section-wrap">
+    <view class="section-head">
+      <text class="section-icon">🏭</text>
+      <view>
+        <text class="section-title">宠物产业园</text>
+        <text class="section-sub">产业集聚 · 政策扶持 · 资源对接</text>
+      </view>
+    </view>
+    <view class="org-card card" wx:for="{{parks}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <image class="org-img" src="{{item.image}}" mode="aspectFill" />
+      <view class="org-info flex-1">
+        <text class="org-name">{{item.name}}</text>
+        <text class="tag tag-blue">{{item.category}}</text>
+        <text class="org-scale">{{item.scale}}</text>
+        <text class="org-region">📍 {{item.region}}</text>
+        <view class="org-intro ellipsis-2">{{item.intro}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 宠物商协会 -->
+  <view class="section-wrap">
+    <view class="section-head">
+      <text class="section-icon">🤝</text>
+      <view>
+        <text class="section-title">宠物商协会</text>
+        <text class="section-sub">行业组织 · 标准制定 · 政企桥梁</text>
+      </view>
+    </view>
+    <view class="org-card card" wx:for="{{associations}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <image class="org-img" src="{{item.image}}" mode="aspectFill" />
+      <view class="org-info flex-1">
+        <text class="org-name">{{item.name}}</text>
+        <text class="tag tag-gold">{{item.type}}</text>
+        <text class="org-scale">{{item.scale}}</text>
+        <text class="org-region">📍 {{item.region}}</text>
+        <view class="org-intro ellipsis-2">{{item.intro}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="apply-fab" bindtap="goApply">
+    <text class="apply-fab-text">产业园、商协会免费入驻</text>
+  </view>
+</view>

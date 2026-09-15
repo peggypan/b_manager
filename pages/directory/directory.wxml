@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="search-wrap">
+    <input class="search-input" placeholder="搜索企业" bindinput="onSearch" />
+  </view>
+  <scroll-view scroll-x class="tab-scroll">
+    <text class="tab-item {{activeType === index ? 'active' : ''}}" wx:for="{{types}}" wx:key="*this" bindtap="filterType" data-index="{{index}}">{{item}}</text>
+  </scroll-view>
+
+  <view class="company-card card" wx:for="{{list}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+    <image class="company-img" src="{{item.image}}" mode="aspectFill" />
+    <view class="company-info flex-1">
+      <text class="company-name">{{item.name}}</text>
+      <text class="tag tag-gold">{{item.type}}</text>
+      <text class="company-meta">{{item.category}} · {{item.region}}</text>
+      <view class="company-intro ellipsis">{{item.intro}}</view>
+    </view>
+  </view>
+
+  <view class="fab" bindtap="goApply">+ 免费入驻</view>
+</view>

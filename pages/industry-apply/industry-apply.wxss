@@ -1,0 +1,40 @@
+.tip-card {
+  background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
+  border: 1rpx solid #C4B5FD;
+}
+.tip-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #5B21B6;
+  display: block;
+  margin-bottom: 8rpx;
+}
+.tip-text {
+  font-size: 26rpx;
+  color: #6D28D9;
+  line-height: 1.6;
+}
+.form-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #F1F5F9;
+}
+.form-item:last-child { border-bottom: none; }
+.form-label {
+  font-size: 28rpx;
+  color: #64748B;
+  display: block;
+  margin-bottom: 12rpx;
+}
+.form-item input,
+.form-item textarea {
+  font-size: 30rpx;
+  width: 100%;
+  color: #1E293B;
+}
+.form-item textarea { height: 160rpx; }
+.picker {
+  font-size: 30rpx;
+  color: #1E293B;
+  padding: 8rpx 0;
+}
+.submit-wrap { padding: 40rpx 48rpx 60rpx; }

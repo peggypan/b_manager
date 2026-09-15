@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "企业名片",
+  "usingComponents": {
+    "media-display": "/components/media-display/media-display"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "达人详情",
+  "usingComponents": {
+    "media-display": "/components/media-display/media-display"
+  }
+}

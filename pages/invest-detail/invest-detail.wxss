@@ -1,0 +1,5 @@
+.detail-title { font-size: 34rpx; font-weight: bold; display: block; margin-bottom: 12rpx; }
+.card-need { font-size: 28rpx; color: #D97706; font-weight: 500; display: block; margin: 12rpx 0; }
+.detail-intro { font-size: 28rpx; color: #64748B; line-height: 1.6; }
+.info-row { display: flex; padding: 12rpx 0; border-bottom: 1rpx solid #F8FAFC; font-size: 28rpx; }
+.info-label { width: 160rpx; color: #94A3B8; flex-shrink: 0; }

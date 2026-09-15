@@ -1,0 +1,14 @@
+.tip-card { background: linear-gradient(135deg, #E0F2FE, #DBEAFE); }
+.tip-title { font-size: 30rpx; font-weight: bold; color: #0369A1; display: block; }
+.tip-text { font-size: 24rpx; color: #0284C7; line-height: 1.5; display: block; margin-top: 8rpx; }
+.fixed-tags { margin-top: 12rpx; }
+.supply-tag {
+  display: inline-block; padding: 4rpx 12rpx; margin-right: 8rpx;
+  font-size: 22rpx; background: #fff; color: #0284C7; border-radius: 6rpx;
+}
+.form-item { padding: 20rpx 0; border-bottom: 1rpx solid #F1F5F9; }
+.form-label { font-size: 28rpx; color: #64748B; display: block; margin-bottom: 12rpx; }
+.form-item input, .form-item textarea { font-size: 30rpx; width: 100%; }
+.form-item textarea { height: 160rpx; }
+.picker { font-size: 30rpx; padding: 8rpx 0; }
+.submit-wrap { padding: 40rpx 48rpx 60rpx; }

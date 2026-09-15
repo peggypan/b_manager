@@ -1,0 +1,112 @@
+.tip-card {
+  background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+  font-size: 26rpx;
+  color: #1E40AF;
+  line-height: 1.6;
+}
+
+.form-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #F1F5F9;
+}
+
+.form-item:last-child { border-bottom: none; }
+
+.form-label {
+  font-size: 28rpx;
+  color: #64748B;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.form-item input,
+.form-item textarea {
+  font-size: 30rpx;
+  width: 100%;
+  color: #1E293B;
+}
+
+.form-item textarea { height: 180rpx; }
+
+.upload-tip {
+  font-size: 24rpx;
+  color: #94A3B8;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.upload-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx;
+  background: #F8FAFF;
+  border: 2rpx dashed #BFDBFE;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.upload-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  margin-right: 16rpx;
+}
+
+.upload-icon-wrap {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.upload-icon-wrap.pdf { background: linear-gradient(135deg, #FEE2E2, #FECACA); }
+.upload-icon-wrap.ppt { background: linear-gradient(135deg, #FFEDD5, #FED7AA); }
+
+.upload-icon {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #DC2626;
+}
+
+.upload-icon-wrap.ppt .upload-icon { color: #EA580C; }
+
+.upload-name {
+  font-size: 28rpx;
+  color: #1E293B;
+  font-weight: 500;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 360rpx;
+}
+
+.upload-desc {
+  font-size: 22rpx;
+  color: #94A3B8;
+  display: block;
+  margin-top: 4rpx;
+}
+
+.upload-action {
+  font-size: 26rpx;
+  color: #1A56DB;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.file-remove {
+  text-align: right;
+  font-size: 24rpx;
+  color: #EF4444;
+  margin-bottom: 16rpx;
+  padding-right: 8rpx;
+}
+
+.submit-wrap { padding: 40rpx 48rpx 60rpx; }
+.submit-btn { width: 100%; }

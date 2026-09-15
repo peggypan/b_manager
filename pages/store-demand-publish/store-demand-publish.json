@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "门店发布求购",
+  "usingComponents": {
+    "media-upload": "/components/media-upload/media-upload"
+  }
+}

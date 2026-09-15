@@ -1,0 +1,24 @@
+.tab-bar { display: flex; background: #fff; padding: 16rpx 24rpx; }
+.tab-item { flex: 1; text-align: center; font-size: 28rpx; color: #64748B; padding: 12rpx 0; }
+.tab-item.active { color: #1A56DB; font-weight: bold; border-bottom: 4rpx solid #1A56DB; }
+.card-title { font-size: 30rpx; font-weight: bold; display: block; }
+.card-sub { font-size: 24rpx; color: #94A3B8; display: block; margin: 8rpx 0; }
+.card-meta-row { margin: 8rpx 0; }
+.meta-text { font-size: 24rpx; color: #64748B; margin-left: 8rpx; }
+.card-intro { font-size: 26rpx; color: #64748B; }
+button.msg-btn {
+  margin-top: 16rpx;
+  min-height: 72rpx;
+  height: 72rpx;
+  padding: 0 24rpx;
+  background: #EFF6FF;
+  color: #1A56DB;
+  font-size: 26rpx;
+  line-height: 1.45;
+  border-radius: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+button.msg-btn::after { border: none; }

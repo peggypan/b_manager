@@ -1,0 +1,16 @@
+.member-header { background: linear-gradient(135deg, #1A56DB, #3B82F6); padding: 48rpx 32rpx; color: #fff; text-align: center; }
+.header-title { font-size: 40rpx; font-weight: bold; display: block; }
+.header-desc { font-size: 26rpx; opacity: 0.85; display: block; margin-top: 8rpx; }
+.current-plan { font-size: 24rpx; background: rgba(255,255,255,0.2); padding: 8rpx 24rpx; border-radius: 24rpx; display: inline-block; margin-top: 16rpx; }
+.free-card { background: #F8FAFC; }
+.rule-item { display: flex; font-size: 26rpx; color: #64748B; padding: 6rpx 0; }
+.rule-dot { margin-right: 8rpx; color: #94A3B8; }
+.plan-card { position: relative; border: 2rpx solid #E2E8F0; }
+.plan-card.recommend { border-color: #1A56DB; }
+.plan-name { font-size: 32rpx; font-weight: bold; }
+.price-num { font-size: 40rpx; font-weight: bold; color: #1A56DB; }
+.price-unit { font-size: 24rpx; color: #64748B; }
+.plan-target { font-size: 24rpx; color: #94A3B8; display: block; margin: 12rpx 0; }
+.feature-item { font-size: 26rpx; color: #475569; display: block; padding: 6rpx 0; }
+.plan-btn { margin-top: 20rpx; width: 100%; }
+.recommend-tag { position: absolute; top: 0; right: 24rpx; background: #1A56DB; color: #fff; font-size: 22rpx; padding: 4rpx 16rpx; border-radius: 0 0 8rpx 8rpx; }

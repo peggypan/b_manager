@@ -1,0 +1,27 @@
+<view class="media-upload">
+  <view class="media-section" wx:if="{{showImage}}">
+    <text class="media-label">{{imageLabel}}（最多{{maxImages}}张）</text>
+    <view class="image-grid">
+      <view class="preview-item" wx:for="{{images}}" wx:key="*this">
+        <image class="preview-img" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-url="{{item}}" />
+        <view class="preview-del" catchtap="removeImage" data-index="{{index}}">×</view>
+      </view>
+      <view class="upload-add" wx:if="{{images.length < maxImages}}" bindtap="chooseImage">
+        <text class="upload-icon">📷</text>
+        <text>{{imageLabel}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="media-section" wx:if="{{showVideo}}">
+    <text class="media-label">{{videoLabel}}</text>
+    <view class="video-preview-wrap" wx:if="{{videoPath}}">
+      <video class="preview-video" src="{{videoPath}}" poster="{{videoThumb}}" controls show-center-play-btn object-fit="contain" />
+      <view class="preview-del video-del" catchtap="removeVideo">×</view>
+    </view>
+    <view class="upload-add video-add" wx:else bindtap="chooseVideo">
+      <text class="upload-icon">🎬</text>
+      <text>{{videoLabel}}</text>
+    </view>
+  </view>
+</view>

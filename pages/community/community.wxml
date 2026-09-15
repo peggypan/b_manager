@@ -1,0 +1,60 @@
+<view class="container page-with-tabbar">
+  <view class="community-header">
+    <input class="search-input" placeholder="搜索笔记、话题、资讯" value="{{keyword}}" bindinput="onSearch" />
+  </view>
+
+  <scroll-view scroll-x enhanced show-scrollbar="{{false}}" class="tab-scroll" enable-flex>
+    <view class="tab-inner">
+      <view
+        class="tab-item {{activeTab === index ? 'active' : ''}}"
+        wx:for="{{tabs}}"
+        wx:key="*this"
+        bindtap="switchTab"
+        data-index="{{index}}"
+      >{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <view class="waterfall" wx:if="{{leftCol.length || rightCol.length}}">
+    <view class="waterfall-col">
+      <view class="note-card" wx:for="{{leftCol}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+        <image class="note-cover" src="{{item.cover || item.images[0]}}" mode="widthFix" />
+        <view class="video-badge" wx:if="{{item.videoUrl}}">▶ 视频</view>
+        <view class="note-body">
+          <view class="note-title">{{item.title}}</view>
+          <view class="note-meta">
+            <image class="note-avatar" src="{{item.avatar}}" mode="aspectFill" />
+            <view class="note-author ellipsis">{{item.author}}</view>
+            <view class="note-likes">❤ {{item.likes}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="waterfall-col">
+      <view class="note-card" wx:for="{{rightCol}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+        <image class="note-cover" src="{{item.cover || item.images[0]}}" mode="widthFix" />
+        <view class="video-badge" wx:if="{{item.videoUrl}}">▶ 视频</view>
+        <view class="note-body">
+          <view class="note-title">{{item.title}}</view>
+          <view class="note-meta">
+            <image class="note-avatar" src="{{item.avatar}}" mode="aspectFill" />
+            <view class="note-author ellipsis">{{item.author}}</view>
+            <view class="note-likes">❤ {{item.likes}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:else>
+    <text class="empty-icon">📝</text>
+    <text>暂无笔记，来发第一篇吧</text>
+  </view>
+
+  <view class="fab-publish" bindtap="goPublish">
+    <view class="fab-inner">
+      <text class="fab-icon">✏️</text>
+      <text class="fab-text">发笔记</text>
+    </view>
+  </view>
+</view>

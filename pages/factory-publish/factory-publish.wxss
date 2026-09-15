@@ -1,0 +1,5 @@
+.form-item { padding: 20rpx 0; border-bottom: 1rpx solid #F1F5F9; }
+.form-label { font-size: 28rpx; color: #64748B; display: block; margin-bottom: 12rpx; }
+.form-item input, .form-item textarea { font-size: 30rpx; width: 100%; }
+.form-item textarea { height: 200rpx; }
+.submit-wrap { padding: 40rpx 48rpx; }

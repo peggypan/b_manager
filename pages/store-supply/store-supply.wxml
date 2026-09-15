@@ -1,0 +1,71 @@
+<view class="container page-with-tabbar">
+  <!-- 面向人群说明 -->
+  <view class="hero-card card">
+    <text class="hero-title">🏪 门店老板找货源</text>
+    <text class="hero-desc">一件起批 · 工厂直发 · 无需囤货 · 平台撮合不对接交易</text>
+  </view>
+
+  <!-- 筛选栏 -->
+  <view class="filter-panel card">
+    <scroll-view scroll-x class="filter-row">
+      <text class="filter-label">品类</text>
+      <text class="filter-chip {{filters.category === item ? 'active' : ''}}" wx:for="{{categories}}" wx:key="*this" bindtap="setFilter" data-key="category" data-value="{{item}}">{{item}}</text>
+    </scroll-view>
+    <scroll-view scroll-x class="filter-row">
+      <text class="filter-label">产地</text>
+      <text class="filter-chip {{filters.origin === item ? 'active' : ''}}" wx:for="{{origins}}" wx:key="*this" bindtap="setFilter" data-key="origin" data-value="{{item}}">{{item}}</text>
+    </scroll-view>
+    <view class="filter-row tag-row">
+      <text class="filter-chip {{filters.dropship ? 'active' : ''}}" bindtap="toggleDropship">一件代发</text>
+      <text class="filter-chip {{filters.inStock === '全部' ? 'active' : ''}}" bindtap="setFilter" data-key="inStock" data-value="全部">全部</text>
+      <text class="filter-chip {{filters.inStock === '现货' ? 'active' : ''}}" bindtap="setFilter" data-key="inStock" data-value="现货">现货</text>
+      <text class="filter-chip {{filters.inStock === '预订' ? 'active' : ''}}" bindtap="setFilter" data-key="inStock" data-value="预订">预订</text>
+    </view>
+  </view>
+
+  <!-- 货源列表 -->
+  <view class="supply-card card" wx:for="{{list}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+    <view class="supply-cover-wrap">
+      <image class="supply-cover" src="{{item.hasVideo ? item.videoCover : item.image}}" mode="aspectFill" />
+      <view class="video-badge" wx:if="{{item.hasVideo}}">▶ 视频</view>
+    </view>
+    <view class="supply-info flex-1">
+      <view class="supply-name ellipsis-2">{{item.name}}</view>
+      <text class="supply-factory">{{item.factoryName}}</text>
+      <view class="supply-tags">
+        <text class="supply-tag">一件起批</text>
+        <text class="supply-tag">工厂直发</text>
+        <text class="supply-tag stock" wx:if="{{item.inStock}}">现货</text>
+      </view>
+      <view class="flex-between">
+        <view class="supply-price">
+          <text class="price-symbol">¥</text>
+          <text class="price-int">{{item.price}}</text>
+          <text class="moq-text">/ 起批{{item.moq}}件</text>
+        </view>
+        <text class="supply-origin">{{item.origin}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 门店求购 -->
+  <view class="card">
+    <view class="flex-between" bindtap="toggleDemands">
+      <text class="section-title" style="margin:0">📋 门店求购需求</text>
+      <text class="more-link">{{showDemands ? '收起' : '展开'}} ></text>
+    </view>
+    <block wx:if="{{showDemands}}">
+      <view class="demand-item" wx:for="{{demands}}" wx:key="id" bindtap="goDemandDetail" data-id="{{item.id}}">
+        <text class="demand-title">{{item.title}}</text>
+        <text class="demand-meta">{{item.storeName}} · {{item.category}} · {{item.time}}</text>
+        <view class="demand-intro ellipsis-2">{{item.intro}}</view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 发布入口 -->
+  <view class="action-bar">
+    <button class="action-btn factory" bindtap="goFactoryPublish">工厂发布货源</button>
+    <button class="action-btn store" bindtap="goStoreDemand">门店发布求购</button>
+  </view>
+</view>

@@ -1,0 +1,7 @@
+.status-row { display: flex; padding: 16rpx 0; border-bottom: 1rpx solid #F1F5F9; font-size: 28rpx; }
+.status-label { width: 160rpx; color: #94A3B8; }
+.status-value.pending { color: #F59E0B; }
+.status-value.approved { color: #059669; }
+.status-value.rejected { color: #EF4444; }
+.tip-text { font-size: 26rpx; color: #64748B; line-height: 1.6; }
+.submit-wrap { padding: 40rpx 48rpx; }

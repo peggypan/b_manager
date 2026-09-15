@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "发笔记",
+  "usingComponents": {
+    "media-upload": "/components/media-upload/media-upload"
+  }
+}

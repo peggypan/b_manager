@@ -1,0 +1,32 @@
+.quota-card { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+.quota-title { font-size: 28rpx; font-weight: bold; }
+.quota-num { font-size: 32rpx; color: #1A56DB; font-weight: bold; }
+.quota-tip { font-size: 22rpx; color: #64748B; display: block; margin-top: 8rpx; }
+.publish-grid { display: flex; flex-wrap: wrap; margin: 0 -8rpx; }
+.publish-btn {
+  width: calc(50% - 16rpx);
+  margin: 8rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28rpx 0;
+  font-size: 26rpx;
+  color: #1E3A8A;
+  font-weight: 500;
+  border-radius: 16rpx;
+  border: 1rpx solid rgba(26, 86, 219, 0.12);
+  box-sizing: border-box;
+}
+.btn-blue-1 { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); }
+.btn-blue-2 { background: linear-gradient(135deg, #E0EFFF, #BFDBFE); }
+.btn-blue-3 { background: linear-gradient(135deg, #DBEAFE, #93C5FD); }
+.btn-blue-4 { background: linear-gradient(135deg, #EEF2FF, #C7D2FE); }
+.publish-icon { font-size: 40rpx; margin-bottom: 8rpx; }
+.tab-scroll { white-space: nowrap; padding: 16rpx 24rpx; }
+.tab-item { display: inline-block; padding: 8rpx 20rpx; margin-right: 12rpx; font-size: 24rpx; color: #64748B; border-radius: 24rpx; background: #fff; }
+.tab-item.active { background: #1A56DB; color: #fff; }
+.publish-item-title { font-size: 30rpx; font-weight: 500; display: block; }
+.publish-item-time { font-size: 22rpx; color: #94A3B8; display: block; margin: 8rpx 0 16rpx; }
+.publish-actions { display: flex; }
+.action-btn { font-size: 24rpx; color: #1A56DB; margin-right: 24rpx; padding: 8rpx 0; }
+.action-btn.danger { color: #EF4444; }

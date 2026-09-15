@@ -1,0 +1,57 @@
+<view class="container page-with-tabbar">
+  <!-- 用户信息 -->
+  <view class="user-header">
+    <view class="avatar-wrap" bindtap="chooseAvatar">
+      <image wx:if="{{profile.avatar}}" class="user-avatar" src="{{profile.avatar}}" mode="aspectFill" />
+      <view class="user-avatar default" wx:else>
+        <text class="default-icon">🏢</text>
+      </view>
+      <view class="avatar-badge">📷</view>
+    </view>
+    <view class="company-info flex-1">
+      <view class="name-row" wx:if="{{!editingName}}">
+        <text class="company-name" bindtap="startEditName">{{profile.nickname}}</text>
+        <text class="edit-name-btn" bindtap="startEditName">✏️</text>
+      </view>
+      <view class="name-edit-row" wx:else>
+        <input
+          class="name-input"
+          value="{{nicknameInput}}"
+          placeholder="请输入网名"
+          maxlength="20"
+          focus="{{editingName}}"
+          bindinput="onNicknameInput"
+          bindconfirm="saveNickname"
+        />
+        <text class="name-action" bindtap="saveNickname">保存</text>
+        <text class="name-action cancel" bindtap="cancelEditName">取消</text>
+      </view>
+      <text class="company-status" wx:if="{{company.status === 'approved'}}">✅ 已认证 · {{company.name}}</text>
+      <text class="company-status pending" wx:elif="{{company.status === 'pending'}}">⏳ 审核中 · {{company.name}}</text>
+      <text class="company-status" wx:else bindtap="goCompanyApply">未入驻 · 点击入驻</text>
+    </view>
+  </view>
+
+  <!-- 会员卡片 -->
+  <view class="member-card card" bindtap="goMember">
+    <view class="flex-between">
+      <view>
+        <text class="member-level">{{membership.active ? membership.planName : '免费用户'}}</text>
+        <text class="member-expire" wx:if="{{membership.active}}">有效期至 {{membership.expireDate}}</text>
+        <text class="member-expire" wx:else>开通会员解锁全平台联系方式</text>
+      </view>
+      <text class="member-action">{{membership.active ? '续费 >' : '去开通 >'}}</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="card menu-section">
+    <view class="menu-item flex-between" wx:for="{{menus}}" wx:key="name" bindtap="onMenuTap" data-item="{{item}}">
+      <view class="menu-left">
+        <text class="menu-icon">{{item.icon}}</text>
+        <text class="menu-name">{{item.name}}</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+</view>

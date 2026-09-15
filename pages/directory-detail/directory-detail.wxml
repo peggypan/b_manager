@@ -1,0 +1,43 @@
+<view class="container page-with-bottom-bar" wx:if="{{item}}">
+  <image class="banner-img" src="{{item.image}}" mode="aspectFill" />
+  <view class="card">
+    <view class="flex-between">
+      <view>
+        <text class="detail-title">{{item.name}}</text>
+        <text class="tag tag-gold">{{item.type}}</text>
+      </view>
+      <text class="fav-btn" bindtap="toggleFav">{{favorited ? '⭐' : '☆'}}</text>
+    </view>
+    <text class="detail-intro">{{item.intro}}</text>
+  </view>
+
+  <media-display images="{{item.images}}" video-url="{{item.videoUrl}}" video-poster="{{item.videoPoster}}" image-title="实景相册" video-title="宣传视频" />
+
+  <view class="card">
+    <text class="section-title">企业信息</text>
+    <view class="info-row"><text class="info-label">主营品类</text><text>{{item.category}}</text></view>
+    <view class="info-row"><text class="info-label">所在地区</text><text>{{item.region}}</text></view>
+    <view class="info-row"><text class="info-label">主营产品</text><text>{{item.products}}</text></view>
+    <view class="info-row"><text class="info-label">资质认证</text><text>{{item.cert}}</text></view>
+  </view>
+  <view class="card">
+    <text class="section-title">联系方式</text>
+    <block wx:if="{{isMember}}">
+      <view class="info-row"><text class="info-label">电话</text><text>{{item.phone}}</text></view>
+      <view class="info-row"><text class="info-label">微信</text><text>{{item.wechat}}</text></view>
+      <view class="contact-btns">
+        <button class="btn-primary contact-btn" bindtap="callPhone">一键拨号</button>
+        <button class="btn-outline contact-btn" bindtap="copyWechat">复制微信</button>
+      </view>
+    </block>
+    <view class="contact-lock" wx:else>
+      <text class="lock-icon">🔒</text>
+      <text class="lock-text">免费入驻企业隐藏联系方式，开通会员即可查看</text>
+      <button class="btn-gold" bindtap="goMember">开通会员查看</button>
+    </view>
+  </view>
+  <view class="bottom-bar">
+    <button class="btn-outline bar-btn" bindtap="leaveMessage">留言沟通</button>
+    <button class="btn-primary bar-btn" bindtap="{{isMember ? 'callPhone' : 'goMember'}}">{{isMember ? '立即联系' : '开通会员'}}</button>
+  </view>
+</view>

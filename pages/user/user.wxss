@@ -1,0 +1,49 @@
+.user-header {
+  background: linear-gradient(135deg, #1A56DB, #3B82F6);
+  padding: 48rpx 32rpx; display: flex; align-items: center; color: #fff;
+}
+.avatar-wrap {
+  position: relative; margin-right: 24rpx; flex-shrink: 0;
+}
+.user-avatar {
+  width: 120rpx; height: 120rpx; border-radius: 24rpx;
+  border: 4rpx solid rgba(255, 255, 255, 0.35);
+}
+.user-avatar.default {
+  background: rgba(255, 255, 255, 0.2);
+  display: flex; align-items: center; justify-content: center;
+}
+.default-icon { font-size: 52rpx; }
+.avatar-badge {
+  position: absolute; right: -4rpx; bottom: -4rpx;
+  width: 40rpx; height: 40rpx; border-radius: 50%;
+  background: #fff; color: #1A56DB; font-size: 22rpx;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+}
+.name-row { display: flex; align-items: center; margin-bottom: 8rpx; }
+.company-name { font-size: 36rpx; font-weight: bold; max-width: 360rpx; }
+.edit-name-btn { font-size: 28rpx; margin-left: 12rpx; opacity: 0.9; }
+.name-edit-row { display: flex; align-items: center; margin-bottom: 8rpx; }
+.name-input {
+  flex: 1; background: rgba(255, 255, 255, 0.2); border-radius: 12rpx;
+  padding: 12rpx 16rpx; font-size: 28rpx; color: #fff; min-width: 0;
+}
+.name-action {
+  margin-left: 12rpx; font-size: 26rpx; color: #FDE68A; flex-shrink: 0;
+}
+.name-action.cancel { color: rgba(255, 255, 255, 0.75); }
+.company-status { font-size: 24rpx; opacity: 0.85; display: block; }
+.company-status.pending { color: #FDE68A; }
+
+.member-card { margin-top: -16rpx; position: relative; z-index: 1; background: linear-gradient(135deg, #FFFBEB, #FEF3C7); border: 1rpx solid #FDE68A; }
+.member-level { font-size: 30rpx; font-weight: bold; color: #92400E; display: block; }
+.member-expire { font-size: 24rpx; color: #B45309; display: block; margin-top: 4rpx; }
+.member-action { font-size: 26rpx; color: #D97706; font-weight: bold; }
+
+.menu-item { padding: 28rpx 0; border-bottom: 1rpx solid #F1F5F9; }
+.menu-item:last-child { border-bottom: none; }
+.menu-left { display: flex; align-items: center; }
+.menu-icon { font-size: 36rpx; margin-right: 16rpx; }
+.menu-name { font-size: 28rpx; }
+.menu-arrow { color: #CBD5E1; }

@@ -1,0 +1,12 @@
+<block wx:if="{{images.length || videoUrl}}">
+  <view class="card" wx:if="{{images.length}}">
+    <text class="section-title">{{imageTitle}}</text>
+    <scroll-view scroll-x class="media-scroll">
+      <image class="media-img" wx:for="{{images}}" wx:key="*this" src="{{item}}" mode="aspectFill" bindtap="previewImage" data-url="{{item}}" />
+    </scroll-view>
+  </view>
+  <view class="card" wx:if="{{videoUrl}}">
+    <text class="section-title">{{videoTitle}}</text>
+    <video class="media-video" src="{{videoUrl}}" poster="{{videoPoster}}" controls show-center-play-btn object-fit="contain" />
+  </view>
+</block>

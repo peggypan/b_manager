@@ -1,0 +1,48 @@
+.header-banner {
+  background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
+  text-align: center;
+  padding: 40rpx 24rpx;
+}
+.banner-title { font-size: 36rpx; font-weight: bold; color: #5B21B6; display: block; }
+.banner-desc { font-size: 26rpx; color: #7C3AED; display: block; margin-top: 8rpx; }
+
+.section-wrap { margin-bottom: 16rpx; }
+.section-head {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 24rpx 8rpx;
+}
+.section-icon { font-size: 44rpx; margin-right: 16rpx; }
+.section-title { font-size: 32rpx; font-weight: bold; color: #1E293B; display: block; }
+.section-sub { font-size: 24rpx; color: #94A3B8; display: block; margin-top: 4rpx; }
+
+.org-card { display: flex; padding: 20rpx; margin-top: 12rpx; }
+.org-img {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 16rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+.org-name { font-size: 30rpx; font-weight: bold; display: block; margin-bottom: 8rpx; }
+.org-scale { font-size: 24rpx; color: #8B5CF6; font-weight: 500; display: block; margin: 8rpx 0 4rpx; }
+.org-region { font-size: 24rpx; color: #94A3B8; display: block; margin-bottom: 8rpx; }
+.org-intro { font-size: 26rpx; color: #64748B; line-height: 1.5; }
+
+.apply-fab {
+  position: fixed;
+  right: 24rpx;
+  bottom: calc(130rpx + env(safe-area-inset-bottom));
+  background: linear-gradient(135deg, #1A56DB, #3B82F6);
+  color: #fff;
+  padding: 20rpx 28rpx;
+  border-radius: 44rpx;
+  box-shadow: 0 6rpx 24rpx rgba(26, 86, 219, 0.45);
+  z-index: 100;
+}
+
+.apply-fab-text {
+  font-size: 26rpx;
+  font-weight: 500;
+  white-space: nowrap;
+}

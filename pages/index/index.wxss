@@ -1,0 +1,117 @@
+.search-bar {
+  display: flex; align-items: center;
+  margin: 20rpx 24rpx; padding: 20rpx 28rpx;
+  background: #fff; border-radius: 44rpx;
+  box-shadow: 0 2rpx 12rpx rgba(26,86,219,0.08);
+}
+.search-icon { margin-right: 12rpx; }
+.search-placeholder { color: #94A3B8; font-size: 28rpx; }
+
+.member-bar {
+  display: flex; align-items: center;
+  margin: 0 24rpx 16rpx; padding: 16rpx 24rpx;
+  background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+  border-radius: 12rpx; border: 1rpx solid #FDE68A;
+}
+.member-bar.active { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); border-color: #BFDBFE; }
+.member-bar-icon { margin-right: 12rpx; }
+.member-bar-text { flex: 1; min-width: 0; font-size: 24rpx; color: #92400E; line-height: 1.4; }
+.member-bar.active .member-bar-text { color: #1E40AF; }
+.member-bar-btn { font-size: 24rpx; color: #D97706; font-weight: bold; }
+
+.banner { height: 280rpx; margin: 0 24rpx 20rpx; border-radius: 16rpx; overflow: hidden; }
+.banner-img { width: 100%; height: 280rpx; }
+
+/* 模块卡片 · 参照大图 UI */
+.module-section {
+  display: flex; flex-wrap: wrap;
+  padding: 0 20rpx; margin-bottom: 8rpx;
+}
+.module-card {
+  width: calc(50% - 12rpx);
+  height: 176rpx;
+  margin: 0 6rpx 16rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.12);
+}
+.module-card-wide {
+  width: calc(100% - 12rpx);
+  height: 160rpx;
+}
+.module-card-content {
+  position: relative; z-index: 2;
+  padding: 28rpx 24rpx;
+  max-width: 68%;
+  min-width: 0;
+}
+.module-card-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1.35;
+  word-break: break-all;
+}
+.module-card-sub {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.45;
+  word-break: break-all;
+}
+.module-decor {
+  position: absolute;
+  right: -8rpx;
+  bottom: -12rpx;
+  width: 180rpx;
+  height: 180rpx;
+  z-index: 1;
+}
+.module-decor-glow {
+  position: absolute;
+  right: 20rpx; bottom: 20rpx;
+  width: 120rpx; height: 120rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+}
+.module-icon-stack {
+  position: absolute;
+  right: 12rpx;
+  bottom: 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.module-icon-main {
+  font-size: 80rpx;
+  line-height: 1;
+  filter: drop-shadow(0 8rpx 16rpx rgba(0, 0, 0, 0.2));
+  transform: rotate(-8deg);
+}
+.module-icon-sub {
+  font-size: 40rpx;
+  margin-top: -12rpx;
+  margin-left: 28rpx;
+  filter: drop-shadow(0 4rpx 10rpx rgba(0, 0, 0, 0.18));
+  transform: rotate(10deg);
+}
+.module-card-wide .module-icon-main { font-size: 88rpx; }
+.module-card-wide .module-decor { width: 200rpx; height: 160rpx; }
+
+.module-card-plain {
+  box-shadow: 0 4rpx 16rpx rgba(15, 23, 42, 0.08);
+}
+.module-card-plain .module-card-content { max-width: 100%; }
+.module-card-plain .module-card-title { color: #1E293B; }
+.module-card-plain .module-card-sub { color: #64748B; }
+
+.section-header { margin-bottom: 16rpx; }
+.more-link { font-size: 24rpx; color: #94A3B8; }
+.demand-item { padding: 20rpx 0; border-bottom: 1rpx solid #F1F5F9; }
+.demand-item:last-child { border-bottom: none; }
+.demand-title { font-size: 28rpx; font-weight: 500; line-height: 1.4; color: #1E293B; }
+.demand-company { font-size: 24rpx; color: #94A3B8; display: block; margin: 8rpx 0; line-height: 1.4; }
+.demand-intro { font-size: 26rpx; color: #64748B; display: block; line-height: 1.5; }

@@ -1,0 +1,6 @@
+.media-scroll { white-space: nowrap; margin-top: 12rpx; }
+.media-img {
+  display: inline-block; width: 200rpx; height: 200rpx;
+  border-radius: 12rpx; margin-right: 16rpx; background: #F1F5F9;
+}
+.media-video { width: 100%; height: 360rpx; border-radius: 12rpx; background: #000; margin-top: 12rpx; }
