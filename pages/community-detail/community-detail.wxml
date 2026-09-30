@@ -4,9 +4,12 @@
     <view class="card author-card">
       <view class="author-row">
         <image class="author-avatar" src="{{post.avatar}}" mode="aspectFill" />
-        <view class="author-info">
+        <view class="author-info flex-1">
           <text class="author-name">{{post.author}}</text>
           <text class="author-time">{{post.time}} · {{post.category}}</text>
+        </view>
+        <view class="follow-btn {{followed ? 'followed' : ''}}" bindtap="toggleFollowAuthor">
+          {{followed ? '已关注' : '+ 关注'}}
         </view>
       </view>
       <view class="post-title">{{post.title}}</view>
@@ -36,6 +39,10 @@
         <text class="action-icon">💬</text>
         <text>{{post.comments}}</text>
       </view>
+      <button class="action-item action-share-btn" open-type="share" hover-class="none">
+        <text class="action-icon">↗️</text>
+        <text>分享</text>
+      </button>
     </view>
 
     <!-- 评论区 -->
@@ -43,15 +50,23 @@
       <text class="section-title">评论 {{comments.length}}</text>
       <view class="comment-item" wx:for="{{comments}}" wx:key="id" id="c{{index}}">
         <image class="comment-avatar" src="{{item.avatar}}" mode="aspectFill" />
-        <view class="comment-body">
+        <view
+          class="comment-body"
+          bindtap="replyToComment"
+          data-id="{{item.id}}"
+          data-author="{{item.author}}"
+        >
           <text class="comment-author">{{item.author}}</text>
-          <view class="comment-text" wx:if="{{item.content}}">{{item.content}}</view>
+          <view class="comment-text" wx:if="{{item.content}}">
+            <text class="reply-at" wx:if="{{item.replyToAuthor}}">回复 @{{item.replyToAuthor}}：</text>
+            <text>{{item.content}}</text>
+          </view>
           <image
             wx:if="{{item.images.length}}"
             class="comment-img"
             src="{{item.images[0]}}"
             mode="widthFix"
-            bindtap="previewImage"
+            catchtap="previewImage"
             data-url="{{item.images[0]}}"
           />
           <text class="comment-time">{{item.time}}</text>
@@ -71,6 +86,11 @@
       <text class="preview-remove" bindtap="removeCommentImage">×</text>
     </view>
 
+    <view class="reply-hint" wx:if="{{replyTo}}">
+      <text class="reply-hint-text">回复 @{{replyTo.author}}</text>
+      <text class="reply-hint-cancel" bindtap="cancelReply">取消</text>
+    </view>
+
     <view class="emoji-panel" wx:if="{{showEmoji}}">
       <text class="emoji-item" wx:for="{{emojis}}" wx:key="*this" bindtap="pickEmoji" data-emoji="{{item}}">{{item}}</text>
     </view>
@@ -80,8 +100,9 @@
       <view class="tool-btn" bindtap="chooseCommentImage">📷</view>
       <input
         class="chat-input"
-        placeholder="说点什么…"
+        placeholder="{{replyTo ? '回复 @' + replyTo.author : '说点什么…'}}"
         value="{{inputText}}"
+        focus="{{inputFocus}}"
         bindinput="onInput"
         confirm-type="send"
         bindconfirm="sendComment"

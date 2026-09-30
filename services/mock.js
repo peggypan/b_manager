@@ -211,6 +211,7 @@ const MEDIA_SERVICES = [
 ];
 
 const COMPANY_TYPES = ['工厂', '品牌', '商家'];
+const DIRECTORY_FILTER_TYPES = ['全部', '工厂', '品牌', '商家', '宠物产业园', '宠物商协会'];
 const INDUSTRY_ORG_TYPES = ['产业园', '商协会'];
 
 /** 产业园列表 */
@@ -289,6 +290,16 @@ const getById = (list, id) => list.find(item => item.id === Number(id));
 /** 企业黄页（不含产业园/商协会） */
 const getDirectoryCompanies = () => COMPANIES.filter(c => COMPANY_TYPES.includes(c.type));
 
+/** 宠业展厅 · 按 Tab 筛选列表 */
+const getDirectoryListByFilter = (filterType) => {
+  if (filterType === '全部') {
+    return [...getDirectoryCompanies(), ...INDUSTRY_PARKS, ...ASSOCIATIONS];
+  }
+  if (filterType === '宠物产业园') return INDUSTRY_PARKS;
+  if (filterType === '宠物商协会') return ASSOCIATIONS;
+  return getDirectoryCompanies().filter((c) => c.type === filterType);
+};
+
 /** 根据 ID 获取产业园或商协会 */
 const getIndustryOrgById = (id) => {
   return getById(INDUSTRY_PARKS, id) || getById(ASSOCIATIONS, id) || getById(COMPANIES, id);
@@ -296,12 +307,13 @@ const getIndustryOrgById = (id) => {
 
 module.exports = {
   BANNERS, MODULES, JOIN_ACTIONS, FACTORIES, ORDERS, DEMANDS, PROJECTS,
-  INFLUENCERS, COMPANIES, MEDIA_SERVICES, COMPANY_TYPES,
+  INFLUENCERS, COMPANIES, MEDIA_SERVICES, COMPANY_TYPES, DIRECTORY_FILTER_TYPES,
   INDUSTRY_ORG_TYPES, INDUSTRY_PARKS, ASSOCIATIONS,
   STORE_SUPPLY_CATEGORIES, STORE_SUPPLY_ORIGINS,
   STORE_SUPPLY_PRODUCTS, STORE_SUPPLY_DEMANDS,
   COMMUNITY_TABS, COMMUNITY_POSTS, COMMUNITY_EMOJIS,
   getDirectoryCompanies,
+  getDirectoryListByFilter,
   getCommunityPostById: (id) => getById(COMMUNITY_POSTS, id),
   getFactoryById: (id) => getById(FACTORIES, id),
   getOrderById: (id) => getById(ORDERS, id),

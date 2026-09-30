@@ -1,31 +1,43 @@
 const mock = require('../../services/mock');
 
+function filterList(type, keyword) {
+  let list = mock.getDirectoryListByFilter(type);
+  if (keyword) {
+    list = list.filter(
+      (c) => c.name.includes(keyword) || (c.intro && c.intro.includes(keyword))
+    );
+  }
+  return list;
+}
+
 Page({
   data: {
-    types: ['全部', ...mock.COMPANY_TYPES],
+    types: mock.DIRECTORY_FILTER_TYPES,
     activeType: 0,
-    list: mock.getDirectoryCompanies(),
+    list: filterList('全部', ''),
     keyword: ''
   },
 
   filterType(e) {
-    const type = this.data.types[e.currentTarget.dataset.index];
-    const all = mock.getDirectoryCompanies();
-    let list = type === '全部' ? all : all.filter(c => c.type === type);
-    if (this.data.keyword) list = list.filter(c => c.name.includes(this.data.keyword));
-    this.setData({ activeType: e.currentTarget.dataset.index, list });
+    const index = e.currentTarget.dataset.index;
+    const type = this.data.types[index];
+    this.setData({
+      activeType: index,
+      list: filterList(type, this.data.keyword)
+    });
   },
 
   onSearch(e) {
     const keyword = e.detail.value;
-    let list = mock.getDirectoryCompanies();
     const type = this.data.types[this.data.activeType];
-    if (type !== '全部') list = list.filter(c => c.type === type);
-    if (keyword) list = list.filter(c => c.name.includes(keyword) || c.intro.includes(keyword));
-    this.setData({ keyword, list });
+    this.setData({ keyword, list: filterList(type, keyword) });
   },
 
-  goDetail(e) { wx.navigateTo({ url: `/pages/directory-detail/directory-detail?id=${e.currentTarget.dataset.id}` }); },
+  goDetail(e) {
+    wx.navigateTo({ url: `/pages/directory-detail/directory-detail?id=${e.currentTarget.dataset.id}` });
+  },
 
-  goApply() { wx.navigateTo({ url: '/pages/directory-apply/directory-apply' }); }
+  goApply() {
+    wx.navigateTo({ url: '/pages/directory-apply/directory-apply' });
+  }
 });

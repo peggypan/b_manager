@@ -1,5 +1,7 @@
 const mock = require('../../services/mock');
-const { getPostById, getComments, addComment, isLiked, toggleLike } = require('../../utils/community');
+const {
+  getPostById, getComments, addComment, isLiked, toggleLike, isFollowing, toggleFollow
+} = require('../../utils/community');
 const { getUserProfile } = require('../../utils/userProfile');
 const { showToast } = require('../../utils/util');
 
@@ -8,12 +10,15 @@ Page({
     post: null,
     comments: [],
     liked: false,
+    followed: false,
     likeCount: 0,
     inputText: '',
     commentImage: '',
     showEmoji: false,
     emojis: mock.COMMUNITY_EMOJIS,
-    scrollTo: ''
+    scrollTo: '',
+    replyTo: null,
+    inputFocus: false
   },
 
   onLoad(options) {
@@ -23,11 +28,35 @@ Page({
     this.setData({
       post,
       liked: isLiked(post.id),
+      followed: isFollowing(post.author),
       likeCount: post.likes || 0
     });
     this.seedDemoComments();
     wx.setNavigationBarTitle({ title: post.title.slice(0, 12) });
     this.loadComments();
+    this.enableShare();
+  },
+
+  onShow() {
+    this.enableShare();
+  },
+
+  enableShare() {
+    wx.showShareMenu({
+      withShareTicket: false,
+      menus: ['shareAppMessage', 'shareTimeline']
+    });
+  },
+
+  getSharePayload() {
+    const { post } = this.data;
+    if (!post) return null;
+    const imageUrl = post.cover || (post.images && post.images[0]) || '';
+    return {
+      title: post.title,
+      path: `/pages/community-detail/community-detail?id=${post.id}`,
+      imageUrl
+    };
   },
 
   seedDemoComments() {
@@ -58,6 +87,42 @@ Page({
     this.setData({ liked, likeCount: Math.max(0, likeCount) });
   },
 
+  toggleFollowAuthor() {
+    const { post } = this.data;
+    if (!post) return;
+    const followed = toggleFollow(post.author);
+    this.setData({ followed });
+    showToast(followed ? '已关注' : '已取消关注');
+  },
+
+  onShareAppMessage() {
+    const payload = this.getSharePayload();
+    return payload || { title: '宠投投 · 宠业社区', path: '/pages/community/community' };
+  },
+
+  onShareTimeline() {
+    const payload = this.getSharePayload();
+    if (!payload) return { title: '宠投投 · 宠业社区' };
+    return {
+      title: payload.title,
+      query: `id=${this.postId}`,
+      imageUrl: payload.imageUrl
+    };
+  },
+
+  replyToComment(e) {
+    const { id, author } = e.currentTarget.dataset;
+    this.setData({
+      replyTo: { id: Number(id), author },
+      inputFocus: false
+    });
+    this.setData({ inputFocus: true, showEmoji: false });
+  },
+
+  cancelReply() {
+    this.setData({ replyTo: null, inputFocus: false });
+  },
+
   onInput(e) {
     this.setData({ inputText: e.detail.value });
   },
@@ -86,7 +151,7 @@ Page({
   },
 
   sendComment() {
-    const { inputText, commentImage } = this.data;
+    const { inputText, commentImage, replyTo } = this.data;
     if (!inputText.trim() && !commentImage) return showToast('请输入评论或选择图片');
 
     const profile = getUserProfile();
@@ -97,13 +162,17 @@ Page({
       avatar: profile.avatar || `https://picsum.photos/seed/c${Date.now()}/100/100`,
       content: inputText.trim(),
       images: commentImage ? [commentImage] : [],
-      time: '刚刚'
+      time: '刚刚',
+      replyToId: replyTo ? replyTo.id : null,
+      replyToAuthor: replyTo ? replyTo.author : ''
     });
 
     this.setData({
       inputText: '',
       commentImage: '',
       showEmoji: false,
+      replyTo: null,
+      inputFocus: false,
       likeCount: this.data.likeCount,
       'post.comments': (this.data.post.comments || 0) + 1
     });

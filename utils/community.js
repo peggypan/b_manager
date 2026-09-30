@@ -2,6 +2,7 @@ const mock = require('../services/mock');
 
 const POSTS_KEY = 'communityPosts';
 const LIKES_KEY = 'communityLikes';
+const FOLLOWS_KEY = 'communityFollows';
 
 const getUserPosts = () => wx.getStorageSync(POSTS_KEY) || [];
 
@@ -48,6 +49,20 @@ const toggleLike = (postId) => {
   return !liked;
 };
 
+const isFollowing = (author) => {
+  const list = wx.getStorageSync(FOLLOWS_KEY) || [];
+  return list.includes(author);
+};
+
+const toggleFollow = (author) => {
+  let list = wx.getStorageSync(FOLLOWS_KEY) || [];
+  const following = list.includes(author);
+  if (following) list = list.filter((name) => name !== author);
+  else list.push(author);
+  wx.setStorageSync(FOLLOWS_KEY, list);
+  return !following;
+};
+
 const splitWaterfall = (list) => {
   const left = [];
   const right = [];
@@ -66,5 +81,7 @@ module.exports = {
   addComment,
   isLiked,
   toggleLike,
+  isFollowing,
+  toggleFollow,
   splitWaterfall
 };
