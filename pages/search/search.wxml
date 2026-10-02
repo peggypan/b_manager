@@ -1,6 +1,6 @@
 <view class="container">
   <view class="search-bar">
-    <input class="search-input" placeholder="搜索工厂、产品、项目、达人、企业" value="{{keyword}}" bindinput="onInput" confirm-type="search" bindconfirm="doSearch" focus />
+    <input class="search-input" placeholder="{{scope === 'order' ? '搜索订单、工厂、找单需求' : '搜索工厂、产品、项目、达人、企业'}}" value="{{keyword}}" bindinput="onInput" confirm-type="search" bindconfirm="doSearch" focus />
     <text class="search-btn" bindtap="doSearch">搜索</text>
   </view>
   <view class="result-list">

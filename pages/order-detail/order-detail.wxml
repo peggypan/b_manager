@@ -1,4 +1,43 @@
-<view class="container page-with-bottom-bar" wx:if="{{item}}">
+<!-- 供需市场 · 需求详情 -->
+<view class="container page-with-bottom-bar" wx:if="{{item && viewMode === 'demand'}}">
+  <view class="card">
+    <text class="detail-name">{{item.title}}</text>
+    <view class="detail-tags">
+      <text class="demand-tag">{{typeName}}</text>
+      <text class="demand-tag category" wx:if="{{item.category}}">{{item.category}}</text>
+    </view>
+    <text class="detail-meta">{{item.company}} · {{item.time}}</text>
+    <text class="detail-intro">{{item.intro}}</text>
+  </view>
+
+  <view class="card">
+    <text class="section-title">需求信息</text>
+    <view class="info-row" wx:if="{{item.region}}">
+      <text class="info-label">地区</text>
+      <text>{{item.region}}</text>
+    </view>
+    <view class="info-row" wx:if="{{item.moq}}">
+      <text class="info-label">采购量级</text>
+      <text>{{item.moq}}</text>
+    </view>
+  </view>
+
+  <media-display
+    wx:if="{{hasMedia}}"
+    images="{{item.images}}"
+    video-url="{{item.videoUrl}}"
+    video-poster="{{item.videoPoster}}"
+    image-title="参考图"
+    video-title="参考视频"
+  />
+
+  <view class="bottom-bar">
+    <button class="btn-primary bar-btn" bindtap="startChat">{{isMember ? '在线沟通' : '开通会员沟通'}}</button>
+  </view>
+</view>
+
+<!-- 找订单 · 产品详情 -->
+<view class="container page-with-bottom-bar" wx:if="{{item && viewMode === 'order'}}">
   <view class="card">
     <text class="detail-title">{{item.title}}</text>
     <text class="detail-sub">{{item.factoryName}} · {{item.type}}</text>
@@ -33,7 +72,7 @@
     </view>
   </view>
   <view class="bottom-bar">
-    <button class="btn-outline bar-btn" bindtap="leaveMessage">留言沟通</button>
+    <button class="btn-outline bar-btn" bindtap="leaveMessage">在线沟通</button>
     <button class="btn-primary bar-btn" bindtap="{{isMember ? 'callPhone' : 'goMember'}}">{{isMember ? '立即联系' : '开通会员'}}</button>
   </view>
 </view>

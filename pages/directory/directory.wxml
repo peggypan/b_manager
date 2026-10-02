@@ -1,18 +1,47 @@
-<view class="container">
+<view class="container page-directory">
   <view class="search-wrap">
-    <input class="search-input" placeholder="搜索企业" bindinput="onSearch" />
+    <input class="search-input" placeholder="搜索企业" value="{{keyword}}" bindinput="onSearch" />
   </view>
-  <scroll-view scroll-x class="tab-scroll">
-    <text class="tab-item {{activeType === index ? 'active' : ''}}" wx:for="{{types}}" wx:key="*this" bindtap="filterType" data-index="{{index}}">{{item}}</text>
-  </scroll-view>
 
-  <view class="company-card card" wx:for="{{list}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
-    <image class="company-img" src="{{item.image}}" mode="aspectFill" />
-    <view class="company-info flex-1">
-      <text class="company-name">{{item.name}}</text>
-      <text class="tag tag-gold">{{item.type}}</text>
-      <text class="company-meta">{{item.category}} · {{item.region}}</text>
-      <view class="company-intro ellipsis">{{item.intro}}</view>
+  <view class="module-panel">
+    <view class="module-panel-inner">
+      <text class="module-panel-tag">宠业展厅</text>
+      <view class="module-grid">
+        <view
+          class="module-item theme-{{item.theme}} {{activeKey === item.key ? 'active' : ''}}"
+          wx:for="{{modules}}"
+          wx:key="key"
+          bindtap="selectModule"
+          data-key="{{item.key}}"
+        >
+          <view class="module-icon-wrap">
+            <text class="module-icon">{{item.icon}}</text>
+          </view>
+          <text class="module-label">{{item.label}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="list-panel">
+    <view class="list-empty card" wx:if="{{list.length === 0}}">
+      <text>暂无匹配信息</text>
+    </view>
+
+    <view
+      class="company-card card"
+      wx:for="{{list}}"
+      wx:key="id"
+      bindtap="goDetail"
+      data-id="{{item.id}}"
+    >
+      <image class="company-img" src="{{item.image}}" mode="aspectFill" />
+      <view class="company-info flex-1">
+        <text class="company-name">{{item.name}}</text>
+        <text class="tag tag-gold">{{item.type}}</text>
+        <text class="company-meta">{{item.category}} · {{item.region}}</text>
+        <view class="company-intro ellipsis">{{item.intro}}</view>
+      </view>
     </view>
   </view>
 

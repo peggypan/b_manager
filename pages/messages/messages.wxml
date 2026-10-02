@@ -3,8 +3,31 @@
     <text class="tab-item {{activeTab === index ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="*this" bindtap="switchTab" data-index="{{index}}">{{item}}</text>
   </view>
 
-  <view class="msg-list">
-    <view class="msg-item card {{!item.read ? 'unread' : ''}}" wx:for="{{messages}}" wx:key="id">
+  <block wx:if="{{activeTab === 0}}">
+    <view class="empty-hint" wx:if="{{sessions.length === 0}}">
+      <text>暂无会话，在工厂/订单等详情页点击「在线沟通」即可开始聊天</text>
+    </view>
+    <view
+      class="msg-item card session-item"
+      wx:for="{{sessions}}"
+      wx:key="targetId"
+      bindtap="openSession"
+      data-id="{{item.targetId}}"
+      data-name="{{item.targetName}}"
+      data-type="{{item.targetType}}"
+      data-subtitle="{{item.subtitle}}"
+    >
+      <view class="flex-between">
+        <text class="msg-from">{{item.targetName}}</text>
+        <text class="msg-time">{{item.updatedAtText}}</text>
+      </view>
+      <text class="msg-sub" wx:if="{{item.subtitle}}">{{item.subtitle}}</text>
+      <text class="msg-content ellipsis">{{item.lastMessage || '点击进入对话'}}</text>
+    </view>
+  </block>
+
+  <view class="msg-list" wx:if="{{activeTab === 1}}">
+    <view class="msg-item card" wx:for="{{notices}}" wx:key="id">
       <view class="flex-between">
         <text class="msg-from">{{item.from}}</text>
         <text class="msg-time">{{item.time}}</text>
@@ -13,10 +36,14 @@
     </view>
   </view>
 
-  <view class="compose-panel card" wx:if="{{showCompose}}">
-    <text class="section-title">发送留言</text>
-    <input placeholder="对方企业/项目名称" bindinput="onComposeInput" data-field="target" />
-    <textarea placeholder="请输入留言内容（免费用户可留言沟通）" bindinput="onComposeInput" data-field="content" />
-    <button class="btn-primary" bindtap="sendMessage">发送</button>
+  <view class="msg-list" wx:if="{{activeTab === 2}}">
+    <view class="msg-item card unread" wx:for="{{intents}}" wx:key="id" bindtap="openSession" data-id="intent_{{item.id}}" data-name="{{item.from}}" data-type="intent">
+      <view class="flex-between">
+        <text class="msg-from">{{item.from}}</text>
+        <text class="msg-time">{{item.time}}</text>
+      </view>
+      <text class="msg-content">{{item.content}}</text>
+      <text class="link-tip">点击进入沟通 ›</text>
+    </view>
   </view>
 </view>

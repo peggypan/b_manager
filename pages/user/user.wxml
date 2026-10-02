@@ -32,12 +32,19 @@
     </view>
   </view>
 
+  <view class="card follow-card">
+    <view class="follow-row flex-between" bindtap="goFollowList">
+      <text class="follow-title">我的关注</text>
+      <text class="follow-link">{{follows.length ? follows.length + ' 位宠友 ›' : '查看关注列表 ›'}}</text>
+    </view>
+  </view>
+
   <!-- 会员卡片 -->
   <view class="member-card card" bindtap="goMember">
     <view class="flex-between">
       <view>
         <text class="member-level">{{membership.active ? membership.planName : '免费用户'}}</text>
-        <text class="member-expire" wx:if="{{membership.active}}">有效期至 {{membership.expireDate}}</text>
+        <text class="member-expire" wx:if="{{membership.active}}">有效期至 {{membership.expireLabel}}</text>
         <text class="member-expire" wx:else>开通会员解锁全平台联系方式</text>
       </view>
       <text class="member-action">{{membership.active ? '续费 >' : '去开通 >'}}</text>
@@ -46,7 +53,7 @@
 
   <!-- 功能菜单 -->
   <view class="card menu-section">
-    <view class="menu-item flex-between" wx:for="{{menus}}" wx:key="name" bindtap="onMenuTap" data-item="{{item}}">
+    <view class="menu-item flex-between" wx:for="{{menus}}" wx:key="name" bindtap="onMenuTap" data-url="{{item.url}}">
       <view class="menu-left">
         <text class="menu-icon">{{item.icon}}</text>
         <text class="menu-name">{{item.name}}</text>

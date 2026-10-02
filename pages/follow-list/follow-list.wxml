@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="tip card" wx:if="{{follows.length === 0}}">
+    <text class="tip-text">还没有关注宠友</text>
+    <text class="tip-link" bindtap="goCommunity">去宠业社区看看 ›</text>
+  </view>
+
+  <view class="follow-item card" wx:for="{{follows}}" wx:key="*this">
+    <view class="follow-main">
+      <text class="follow-avatar">👤</text>
+      <view class="follow-info">
+        <text class="follow-name">{{item}}</text>
+        <text class="follow-sub">社区作者 · 笔记与动态</text>
+      </view>
+    </view>
+    <view class="follow-btn" bindtap="unfollow" data-name="{{item}}">取消关注</view>
+  </view>
+</view>

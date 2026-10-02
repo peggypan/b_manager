@@ -1,0 +1,6 @@
+admin/**
+node_modules/**
+.git/**
+**/*.docx
+**/.DS_Store
+read.md

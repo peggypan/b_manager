@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "发布找订单需求",
+  "usingComponents": {
+    "media-upload": "/components/media-upload/media-upload"
+  }
+}

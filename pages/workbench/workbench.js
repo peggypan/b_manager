@@ -46,6 +46,6 @@ Page({
   },
 
   goPublish() {
-    wx.navigateTo({ url: '/pages/publish/publish' });
+    wx.switchTab({ url: '/pages/publish/publish' });
   }
 });

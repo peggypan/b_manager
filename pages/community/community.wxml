@@ -17,31 +17,37 @@
 
   <view class="waterfall" wx:if="{{leftCol.length || rightCol.length}}">
     <view class="waterfall-col">
-      <view class="note-card" wx:for="{{leftCol}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
-        <image class="note-cover" src="{{item.cover || item.images[0]}}" mode="widthFix" />
-        <view class="video-badge" wx:if="{{item.videoUrl}}">▶ 视频</view>
-        <view class="note-body">
-          <view class="note-title">{{item.title}}</view>
-          <view class="note-meta">
-            <image class="note-avatar" src="{{item.avatar}}" mode="aspectFill" />
-            <view class="note-author ellipsis">{{item.author}}</view>
-            <view class="note-likes">❤ {{item.likes}}</view>
+      <view class="note-card-wrap" wx:for="{{leftCol}}" wx:key="id">
+        <view class="note-card" bindtap="goDetail" data-id="{{item.id}}">
+          <image class="note-cover" src="{{item.cover || item.images[0]}}" mode="widthFix" />
+          <view class="video-badge" wx:if="{{item.videoUrl}}">▶ 视频</view>
+          <view class="note-body">
+            <view class="note-title">{{item.title}}</view>
+            <view class="note-meta">
+              <image class="note-avatar" src="{{item.avatar}}" mode="aspectFill" />
+              <view class="note-author ellipsis">{{item.author}}</view>
+              <view class="note-likes">❤ {{item.likes}}</view>
+            </view>
           </view>
         </view>
+        <view class="note-delete" wx:if="{{item.isMine}}" catchtap="confirmDeleteNote" data-id="{{item.id}}">删除</view>
       </view>
     </view>
     <view class="waterfall-col">
-      <view class="note-card" wx:for="{{rightCol}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
-        <image class="note-cover" src="{{item.cover || item.images[0]}}" mode="widthFix" />
-        <view class="video-badge" wx:if="{{item.videoUrl}}">▶ 视频</view>
-        <view class="note-body">
-          <view class="note-title">{{item.title}}</view>
-          <view class="note-meta">
-            <image class="note-avatar" src="{{item.avatar}}" mode="aspectFill" />
-            <view class="note-author ellipsis">{{item.author}}</view>
-            <view class="note-likes">❤ {{item.likes}}</view>
+      <view class="note-card-wrap" wx:for="{{rightCol}}" wx:key="id">
+        <view class="note-card" bindtap="goDetail" data-id="{{item.id}}">
+          <image class="note-cover" src="{{item.cover || item.images[0]}}" mode="widthFix" />
+          <view class="video-badge" wx:if="{{item.videoUrl}}">▶ 视频</view>
+          <view class="note-body">
+            <view class="note-title">{{item.title}}</view>
+            <view class="note-meta">
+              <image class="note-avatar" src="{{item.avatar}}" mode="aspectFill" />
+              <view class="note-author ellipsis">{{item.author}}</view>
+              <view class="note-likes">❤ {{item.likes}}</view>
+            </view>
           </view>
         </view>
+        <view class="note-delete" wx:if="{{item.isMine}}" catchtap="confirmDeleteNote" data-id="{{item.id}}">删除</view>
       </view>
     </view>
   </view>

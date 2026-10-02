@@ -23,5 +23,5 @@
     </view>
   </view>
 
-  <view class="fab" bindtap="goPublish">+ 发布需求</view>
+  <view class="fab" bindtap="goPublish">+ 发布工厂</view>
 </view>

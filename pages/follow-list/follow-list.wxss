@@ -1,0 +1,62 @@
+.tip {
+  margin-top: 24rpx;
+  padding: 48rpx 32rpx;
+  text-align: center;
+}
+
+.tip-text {
+  display: block;
+  font-size: 28rpx;
+  color: #64748b;
+}
+
+.tip-link {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 26rpx;
+  color: #1a56db;
+}
+
+.follow-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx;
+  margin-top: 16rpx;
+}
+
+.follow-main {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1;
+}
+
+.follow-avatar {
+  font-size: 40rpx;
+  margin-right: 16rpx;
+}
+
+.follow-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1e293b;
+  display: block;
+}
+
+.follow-sub {
+  font-size: 24rpx;
+  color: #94a3b8;
+  display: block;
+  margin-top: 4rpx;
+}
+
+.follow-btn {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+  padding: 12rpx 20rpx;
+  font-size: 24rpx;
+  color: #64748b;
+  background: #f1f5f9;
+  border-radius: 28rpx;
+}

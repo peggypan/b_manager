@@ -1,4 +1,5 @@
 const mock = require('../../services/mock');
+const { openChat } = require('../../utils/chat');
 const { isMember, promptUpgrade } = require('../../utils/member');
 const { callPhone, copyWechat } = require('../../utils/util');
 
@@ -10,7 +11,7 @@ Page({
   },
 
   onLoad(options) {
-    const item = mock.getStoreSupplyById(options.id);
+    const item = require('../../utils/localPublish').getStoreSupplyById(options.id);
     if (item) {
       this.setData({ item });
       wx.setNavigationBarTitle({ title: item.name });
@@ -42,11 +43,12 @@ Page({
 
   consultDropship() {
     if (!isMember()) return promptUpgrade('开通会员后可咨询一件代发政策');
-    wx.showModal({
-      title: '咨询一件代发',
-      content: `工厂：${this.data.item.factoryName}\n产品：${this.data.item.name}\n请通过电话或微信与工厂沟通代发政策、结算方式`,
-      confirmText: '联系工厂',
-      success: (res) => { if (res.confirm) this.callFactory(); }
+    const item = this.data.item;
+    openChat({
+      targetId: `store_supply_${item.id}`,
+      targetName: item.factoryName,
+      targetType: 'store_supply',
+      subtitle: `代发咨询 · ${item.name}`,
     });
   },
 

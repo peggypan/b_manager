@@ -51,5 +51,6 @@
       <view class="influencer-intro ellipsis">{{item.intro}}</view>
       <text class="influencer-cases">案例：{{item.cases}}</text>
     </view>
+    <view class="fab fab-influencer" bindtap="goInfluencerPublish">+ 达人入驻</view>
   </block>
 </view>

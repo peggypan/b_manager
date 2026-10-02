@@ -8,8 +8,11 @@
           <text class="author-name">{{post.author}}</text>
           <text class="author-time">{{post.time}} · {{post.category}}</text>
         </view>
-        <view class="follow-btn {{followed ? 'followed' : ''}}" bindtap="toggleFollowAuthor">
-          {{followed ? '已关注' : '+ 关注'}}
+        <view class="author-actions">
+          <view class="follow-btn {{followed ? 'followed' : ''}}" bindtap="toggleFollowAuthor">
+            {{followed ? '已关注' : '+ 关注'}}
+          </view>
+          <view class="delete-post-btn" wx:if="{{canDeletePost}}" bindtap="confirmDeletePost">删除</view>
         </view>
       </view>
       <view class="post-title">{{post.title}}</view>
@@ -71,6 +74,7 @@
           />
           <text class="comment-time">{{item.time}}</text>
         </view>
+        <text class="comment-delete" wx:if="{{item.isMine}}" catchtap="confirmDeleteComment" data-id="{{item.id}}">删除</text>
       </view>
       <view class="empty-comment" wx:if="{{comments.length === 0}}">
         <text>暂无评论，来抢沙发吧～</text>

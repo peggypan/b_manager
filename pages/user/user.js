@@ -1,6 +1,15 @@
 const { getMembership } = require('../../utils/member');
 const { getUserProfile, saveUserProfile } = require('../../utils/userProfile');
+const { getFollowList } = require('../../utils/community');
 const { showToast } = require('../../utils/util');
+
+const TAB_URLS = new Set([
+  '/pages/index/index',
+  '/pages/market/market',
+  '/pages/publish/publish',
+  '/pages/community/community',
+  '/pages/user/user',
+]);
 
 Page({
   data: {
@@ -9,6 +18,7 @@ Page({
     membership: {},
     editingName: false,
     nicknameInput: '',
+    follows: [],
     menus: [
       { name: '企业资质管理', icon: '🏢', url: '/pages/company/company' },
       { name: '会员中心', icon: '👑', url: '/pages/member/member' },
@@ -16,8 +26,8 @@ Page({
       { name: '我的收藏', icon: '⭐', url: '/pages/favorites/favorites' },
       { name: '消息中心', icon: '💬', url: '/pages/messages/messages' },
       { name: '服务预约记录', icon: '📋', url: '/pages/media-book/media-book' },
-      { name: '企业黄页入驻', icon: '📇', url: '/pages/directory-apply/directory-apply' }
-    ]
+      { name: '企业黄页入驻', icon: '📇', url: '/pages/directory-apply/directory-apply' },
+    ],
   },
 
   onShow() {
@@ -25,10 +35,12 @@ Page({
       this.getTabBar().setData({ selected: 4, showPublish: false });
     }
     const company = wx.getStorageSync('company') || { name: '未入驻企业', status: 'none' };
+    const follows = getFollowList();
     this.setData({
       company,
       membership: getMembership(),
-      profile: getUserProfile()
+      profile: getUserProfile(),
+      follows,
     });
   },
 
@@ -42,14 +54,14 @@ Page({
         saveUserProfile({ avatar });
         this.setData({ profile: getUserProfile() });
         showToast('头像已更新');
-      }
+      },
     });
   },
 
   startEditName() {
     this.setData({
       editingName: true,
-      nicknameInput: this.data.profile.nickname
+      nicknameInput: this.data.profile.nickname,
     });
   },
 
@@ -65,7 +77,7 @@ Page({
     this.setData({
       profile: getUserProfile(),
       editingName: false,
-      nicknameInput: ''
+      nicknameInput: '',
     });
     showToast('网名已更新');
   },
@@ -79,10 +91,21 @@ Page({
   },
 
   onMenuTap(e) {
-    wx.navigateTo({ url: e.currentTarget.dataset.item.url });
+    const url = e.currentTarget.dataset.url;
+    if (!url) return;
+    const path = url.split('?')[0];
+    if (TAB_URLS.has(path)) {
+      wx.switchTab({ url: path });
+      return;
+    }
+    wx.navigateTo({ url });
   },
 
   goMember() {
     wx.navigateTo({ url: '/pages/member/member' });
-  }
+  },
+
+  goFollowList() {
+    wx.navigateTo({ url: '/pages/follow-list/follow-list' });
+  },
 });

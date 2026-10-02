@@ -1,13 +1,25 @@
 const mock = require('../../services/mock');
+const localPublish = require('../../utils/localPublish');
+const { requireContactFields, trim } = require('../../utils/contactForm');
 const { showToast } = require('../../utils/util');
 
 Page({
   data: {
     types: mock.COMPANY_TYPES,
-    form: { name: '', type: '', category: '', region: '', intro: '', products: '', contact: '', phone: '' },
+    form: {
+      name: '',
+      type: '',
+      category: '',
+      region: '',
+      intro: '',
+      products: '',
+      contact: '',
+      phone: '',
+      wechat: '',
+    },
     images: [],
     videoPath: '',
-    videoThumb: ''
+    videoThumb: '',
   },
 
   onLoad(options) {
@@ -30,18 +42,57 @@ Page({
   },
 
   submit() {
-    const { form } = this.data;
-    if (!form.name || !form.type || !form.contact) {
-      showToast('请填写企业名称、类型和联系人');
+    const { form, images, videoPath, videoThumb } = this.data;
+    if (!trim(form.name) || !trim(form.type)) {
+      showToast('请填写企业名称和主体类型');
       return;
     }
+    const contactErr = requireContactFields(form);
+    if (contactErr) {
+      showToast(contactErr);
+      return;
+    }
+
+    const id = Date.now();
+    const image =
+      images[0] || `https://picsum.photos/seed/dir${id}/600/400`;
+
+    localPublish.prepend(localPublish.KEYS.directory, {
+      id,
+      name: trim(form.name),
+      type: form.type,
+      category: form.category || form.type,
+      region: form.region || '全国',
+      intro: form.intro || form.products || '用户入驻展示',
+      products: form.products,
+      phone: trim(form.phone),
+      wechat: trim(form.wechat),
+      contact: trim(form.contact),
+      image,
+      images,
+      videoUrl: videoPath,
+      videoPoster: videoThumb,
+      status: 'published',
+    });
+
     wx.setStorageSync('company', {
       name: form.name,
       type: form.type,
-      status: 'pending',
-      applyTime: new Date().toISOString()
+      status: 'approved',
+      applyTime: new Date().toISOString(),
     });
-    showToast('入驻申请已提交');
-    setTimeout(() => wx.navigateBack(), 1500);
-  }
+
+    const list = wx.getStorageSync('myPublish') || [];
+    list.unshift({
+      id,
+      type: 'directory',
+      title: form.name,
+      time: new Date().toLocaleDateString('zh-CN').replace(/\//g, '-'),
+      status: 'published',
+    });
+    wx.setStorageSync('myPublish', list);
+
+    showToast('入驻成功，已展示在宠业展厅');
+    setTimeout(() => wx.navigateBack(), 1200);
+  },
 });

@@ -4,6 +4,8 @@
  * @description 填写项目名称、联系方式、融资需求，支持上传 BP（PDF/PPT）
  */
 const { getPublishLimit, promptUpgrade, getMembership } = require('../../utils/member');
+const localPublish = require('../../utils/localPublish');
+const { requireContactFields, trim } = require('../../utils/contactForm');
 const { showToast } = require('../../utils/util');
 
 Page({
@@ -11,6 +13,8 @@ Page({
     form: {
       name: '',
       contact: '',
+      phone: '',
+      wechat: '',
       need: '',
       track: '',
       stage: '',
@@ -81,9 +85,10 @@ Page({
     if (!getMembership().active) return promptUpgrade();
 
     const { form, pdfFile, pptFile } = this.data;
-    if (!form.name) { showToast('请填写项目名称'); return; }
-    if (!form.contact) { showToast('请填写联系方式'); return; }
-    if (!form.need) { showToast('请填写融资需求'); return; }
+    if (!trim(form.name)) { showToast('请填写项目名称'); return; }
+    if (!trim(form.need)) { showToast('请填写融资需求'); return; }
+    const contactErr = requireContactFields(form);
+    if (contactErr) { showToast(contactErr); return; }
 
     const list = wx.getStorageSync('myPublish') || [];
     const limit = getPublishLimit();
@@ -92,22 +97,44 @@ Page({
       return;
     }
 
+    const id = Date.now();
+    const time = new Date().toLocaleDateString('zh-CN').replace(/\//g, '-');
+    const { images, videoPath, videoThumb } = this.data;
+
+    localPublish.prepend(localPublish.KEYS.projects, {
+      id,
+      name: form.name,
+      track: form.track || '综合',
+      stage: form.stage || '融资中',
+      need: form.need,
+      intro: form.intro || form.need,
+      team: `联系人：${trim(form.contact)}`,
+      bp: pdfFile ? pdfFile.name : pptFile ? pptFile.name : '',
+      phone: trim(form.phone),
+      wechat: trim(form.wechat),
+      images: images.length ? images : [`https://picsum.photos/seed/project${id}/600/400`],
+      videoUrl: videoPath,
+      videoPoster: videoThumb,
+    });
+
     list.unshift({
-      id: Date.now(),
+      id,
       type: 'invest',
       title: form.name,
-      contact: form.contact,
+      contact: trim(form.contact),
+      phone: trim(form.phone),
+      wechat: trim(form.wechat),
       need: form.need,
       track: form.track,
       stage: form.stage,
       intro: form.intro,
       pdfFile: pdfFile ? pdfFile.name : '',
       pptFile: pptFile ? pptFile.name : '',
-      time: new Date().toLocaleDateString(),
-      status: 'pending'
+      time,
+      status: 'published',
     });
     wx.setStorageSync('myPublish', list);
-    showToast('发布成功，等待审核');
-    setTimeout(() => wx.navigateBack(), 1500);
+    showToast('发布成功，已展示在宠业创投');
+    setTimeout(() => wx.navigateBack(), 1200);
   }
 });

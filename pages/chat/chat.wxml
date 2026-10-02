@@ -1,0 +1,44 @@
+<view class="chat-page" wx:if="{{targetName}}">
+  <view class="chat-header card">
+    <text class="chat-peer">{{targetName}}</text>
+    <text class="chat-sub" wx:if="{{subtitle}}">{{subtitle}}</text>
+  </view>
+
+  <scroll-view
+    scroll-y
+    class="chat-scroll"
+    scroll-into-view="{{scrollTo}}"
+    scroll-with-animation
+    enhanced
+    show-scrollbar="{{false}}"
+  >
+    <view class="chat-tip">平台撮合沟通，请勿线下转账至私人账户</view>
+    <view
+      class="bubble-row {{item.from === 'me' ? 'mine' : 'peer'}}"
+      wx:for="{{messages}}"
+      wx:key="id"
+      id="msg{{index}}"
+    >
+      <view class="bubble">
+        <text class="bubble-text">{{item.content}}</text>
+        <text class="bubble-time">{{item.time}}</text>
+      </view>
+    </view>
+    <view id="msg-bottom" class="scroll-tail"></view>
+  </scroll-view>
+
+  <view class="chat-bar">
+    <view class="chat-input-row">
+      <input
+        class="chat-input"
+        placeholder="输入消息，Enter 发送"
+        value="{{inputText}}"
+        bindinput="onInput"
+        confirm-type="send"
+        bindconfirm="send"
+        adjust-position
+      />
+      <view class="send-btn" bindtap="send">发送</view>
+    </view>
+  </view>
+</view>

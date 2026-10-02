@@ -36,7 +36,17 @@
 .company-status { font-size: 24rpx; opacity: 0.85; display: block; }
 .company-status.pending { color: #FDE68A; }
 
-.member-card { margin-top: -16rpx; position: relative; z-index: 1; background: linear-gradient(135deg, #FFFBEB, #FEF3C7); border: 1rpx solid #FDE68A; }
+.follow-card { margin-top: 16rpx; }
+.follow-row {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f1f5f9;
+}
+.follow-row:last-child { border-bottom: none; }
+.follow-title { font-size: 28rpx; color: #1e293b; }
+.follow-stat { font-size: 28rpx; color: #1e293b; }
+.follow-link { font-size: 26rpx; color: #1a56db; }
+
+.member-card { margin-top: 16rpx; position: relative; z-index: 1; background: linear-gradient(135deg, #FFFBEB, #FEF3C7); border: 1rpx solid #FDE68A; }
 .member-level { font-size: 30rpx; font-weight: bold; color: #92400E; display: block; }
 .member-expire { font-size: 24rpx; color: #B45309; display: block; margin-top: 4rpx; }
 .member-action { font-size: 26rpx; color: #D97706; font-weight: bold; }

@@ -40,27 +40,42 @@
 .demand-meta { font-size: 22rpx; color: #94A3B8; display: block; margin: 4rpx 0; }
 .demand-intro { font-size: 26rpx; color: #64748B; display: block; line-height: 1.5; }
 
-.action-bar {
-  display: flex;
-  align-items: center;
-  padding: 24rpx;
-  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+.page-store-supply {
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
 }
-.action-btn {
-  flex: 1;
-  margin: 0 8rpx;
-  padding: 0 16rpx;
-  box-sizing: border-box;
-  min-height: 80rpx;
-  height: 80rpx;
-  font-size: 26rpx;
-  line-height: 1.45;
-  border-radius: 40rpx;
+
+.fab-circle {
+  position: fixed;
+  right: 32rpx;
+  bottom: calc(32rpx + env(safe-area-inset-bottom));
+  z-index: 200;
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 50%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  gap: 2rpx;
+  color: #fff;
+  background: linear-gradient(145deg, #1A56DB, #3B82F6);
+  box-shadow: 0 10rpx 28rpx rgba(26, 86, 219, 0.42);
 }
-.action-btn::after { border: none; }
-.action-btn.factory { background: linear-gradient(135deg, #1A56DB, #3B82F6); color: #fff; border: none; }
-.action-btn.store { background: #fff; color: #1A56DB; border: 2rpx solid #1A56DB; }
+
+.fab-circle-icon {
+  font-size: 40rpx;
+  font-weight: 300;
+  line-height: 1;
+  margin-top: -4rpx;
+}
+
+.fab-circle-label {
+  font-size: 22rpx;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.fab-circle-active {
+  transform: scale(0.94);
+  opacity: 0.92;
+}

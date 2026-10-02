@@ -1,0 +1,75 @@
+<view class="container">
+  <view class="tip-card card">
+    <text class="tip-title">达人入驻</text>
+    <text class="tip-text">提交后展示在「宠业创投 · 达人合作」列表，品牌方可查看简介；联系方式需开通会员可见。</text>
+  </view>
+
+  <view class="preview-label">列表预览</view>
+  <view class="influencer-card card preview-card">
+    <view class="flex-between">
+      <text class="influencer-name">{{form.name || '达人昵称'}}</text>
+      <text class="tag tag-blue">{{form.platform || '平台'}}</text>
+    </view>
+    <text class="influencer-meta">粉丝 {{form.fans || '—'}} · {{form.category || '垂类'}}</text>
+    <text class="influencer-mode">合作模式：{{form.mode || '—'}}</text>
+    <view class="card-intro ellipsis-2">{{form.intro || '简介将展示在这里'}}</view>
+  </view>
+
+  <view class="card form-group">
+    <view class="form-item">
+      <text class="form-label">达人昵称 *</text>
+      <input placeholder="如：萌宠日记" value="{{form.name}}" bindinput="onInput" data-field="name" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">主平台 *</text>
+      <picker range="{{platforms}}" bindchange="selectPlatform">
+        <view class="picker">{{form.platform || '请选择抖音/快手/小红书'}} ></view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">粉丝量 *</text>
+      <input placeholder="如：128万" value="{{form.fans}}" bindinput="onInput" data-field="fans" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">内容垂类 *</text>
+      <input placeholder="如：猫狗日常、猫咪科普" value="{{form.category}}" bindinput="onInput" data-field="category" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">合作模式 *</text>
+      <input placeholder="如：分销带货、坑位费+分销" value="{{form.mode}}" bindinput="onInput" data-field="mode" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">简介 *</text>
+      <textarea placeholder="账号定位、受众特点" value="{{form.intro}}" bindinput="onInput" data-field="intro" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">合作案例</text>
+      <input placeholder="如：单月带货GMV 80万+" value="{{form.cases}}" bindinput="onInput" data-field="cases" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">擅长品类</text>
+      <input placeholder="如：主粮、零食、用品" value="{{form.products}}" bindinput="onInput" data-field="products" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">联系人 *</text>
+      <input placeholder="本人或经纪人" value="{{form.contact}}" bindinput="onInput" data-field="contact" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">联系电话 *</text>
+      <input type="number" placeholder="手机号" value="{{form.phone}}" bindinput="onInput" data-field="phone" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">微信号 *</text>
+      <input placeholder="商务对接微信" value="{{form.wechat}}" bindinput="onInput" data-field="wechat" />
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="section-title">账号展示（选填）</text>
+    <media-upload max-images="{{6}}" image-label="上传主页/作品截图" video-label="上传代表作视频" bind:change="onMediaChange" />
+  </view>
+
+  <view class="submit-wrap">
+    <button class="btn-primary" bindtap="submit">提交入驻</button>
+  </view>
+</view>

@@ -24,8 +24,16 @@
       <textarea placeholder="详细描述规格、价格区间、代发要求等" bindinput="onInput" data-field="intro" />
     </view>
     <view class="form-item">
-      <text class="form-label">联系方式</text>
-      <input placeholder="手机号或微信号" bindinput="onInput" data-field="contact" />
+      <text class="form-label">联系人 *</text>
+      <input placeholder="联系人姓名" bindinput="onInput" data-field="contact" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">联系电话 *</text>
+      <input type="number" placeholder="手机号或座机" bindinput="onInput" data-field="phone" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">微信号 *</text>
+      <input placeholder="用于工厂联系的微信号" bindinput="onInput" data-field="wechat" />
     </view>
   </view>
 

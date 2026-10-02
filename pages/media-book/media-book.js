@@ -1,10 +1,11 @@
 const mock = require('../../services/mock');
+const { requireContactFields, trim } = require('../../utils/contactForm');
 const { showToast } = require('../../utils/util');
 
 Page({
   data: {
     service: null,
-    form: { company: '', contact: '', phone: '', demand: '' },
+    form: { company: '', contact: '', phone: '', wechat: '', demand: '' },
     bookings: [],
     images: [],
     videoPath: '',
@@ -28,8 +29,13 @@ Page({
 
   submit() {
     const { form, service } = this.data;
-    if (!form.company || !form.contact || !form.phone) {
-      showToast('请填写企业名称、联系人和电话');
+    if (!trim(form.company)) {
+      showToast('请填写企业名称');
+      return;
+    }
+    const contactErr = requireContactFields(form);
+    if (contactErr) {
+      showToast(contactErr);
       return;
     }
     const bookings = wx.getStorageSync('mediaBookings') || [];
@@ -43,5 +49,22 @@ Page({
     wx.setStorageSync('mediaBookings', bookings);
     showToast('预约已提交，商务将联系您');
     setTimeout(() => wx.navigateBack(), 1500);
-  }
+  },
+
+  removeBooking(e) {
+    const id = Number(e.currentTarget.dataset.id);
+    wx.showModal({
+      title: '删除预约',
+      content: '确定删除这条预约记录吗？',
+      success: (res) => {
+        if (!res.confirm) return;
+        const bookings = (wx.getStorageSync('mediaBookings') || []).filter(
+          (b) => Number(b.id) !== id,
+        );
+        wx.setStorageSync('mediaBookings', bookings);
+        this.setData({ bookings });
+        showToast('已删除');
+      },
+    });
+  },
 });

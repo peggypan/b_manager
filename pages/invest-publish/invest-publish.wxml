@@ -11,8 +11,16 @@
       <input placeholder="如：智能宠物健康监测项圈" value="{{form.name}}" bindinput="onInput" data-field="name" />
     </view>
     <view class="form-item">
-      <text class="form-label">联系方式 *</text>
-      <input placeholder="手机号或微信号" value="{{form.contact}}" bindinput="onInput" data-field="contact" />
+      <text class="form-label">联系人 *</text>
+      <input placeholder="联系人姓名" value="{{form.contact}}" bindinput="onInput" data-field="contact" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">联系电话 *</text>
+      <input type="number" placeholder="手机号或座机" value="{{form.phone}}" bindinput="onInput" data-field="phone" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">微信号 *</text>
+      <input placeholder="用于投资方联系的微信号" value="{{form.wechat}}" bindinput="onInput" data-field="wechat" />
     </view>
     <view class="form-item">
       <text class="form-label">融资需求 *</text>

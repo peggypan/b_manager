@@ -1,39 +1,100 @@
-const { getMembership, getPublishLimit, promptUpgrade } = require('../../utils/member');
+const { getMembership, getPublishLimit } = require('../../utils/member');
+const {
+  TYPE_LABELS,
+  buildAllPublishRows,
+  filterRowsByTab,
+  offlinePublishEntry,
+  removePublishEntry,
+} = require('../../utils/userContent');
 const { showToast } = require('../../utils/util');
+
+const TAB_KEYS = [
+  '',
+  'community',
+  'factory',
+  'order_group',
+  'storeSupply',
+  'storeDemand',
+  'directory',
+  'invest',
+  'industry',
+];
+
+const STATUS_TEXT = {
+  pending: '审核中',
+  published: '已发布',
+  approved: '已发布',
+  offline: '已下架',
+};
+
+const EDITABLE_TYPES = new Set([
+  'community',
+  'factory',
+  'factory_info',
+  'order',
+  'order_demand',
+  'storeSupply',
+  'storeDemand',
+  'directory',
+  'invest',
+  'industry',
+  'influencer',
+]);
 
 Page({
   data: {
-    tabs: ['全部', '工厂需求', '产品/订单', '投资项目'],
+    tabs: [
+      '全部',
+      '社区帖子',
+      '找工厂',
+      '找订单',
+      '门店货源',
+      '门店求购',
+      '宠业展厅',
+      '宠业创投',
+      '免费入驻',
+    ],
     activeTab: 0,
     publishList: [],
     publishLimit: 0,
     publishUsed: 0,
-    membership: {}
+    membership: {},
   },
 
   onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 2, showPublish: false });
+    }
     this.loadData();
   },
 
   loadData() {
-    const publishList = wx.getStorageSync('myPublish') || [];
     const membership = getMembership();
     const limit = getPublishLimit();
+    const myPublishOnly = wx.getStorageSync('myPublish') || [];
     this.setData({
-      publishList,
       membership,
       publishLimit: limit,
-      publishUsed: publishList.length
+      publishUsed: myPublishOnly.length,
     });
     this.filterList();
   },
 
   filterList() {
-    const types = ['', 'factory', 'order', 'invest'];
-    const type = types[this.data.activeTab];
-    const all = wx.getStorageSync('myPublish') || [];
-    const publishList = type ? all.filter(p => p.type === type) : all;
-    this.setData({ publishList });
+    const tabKey = TAB_KEYS[this.data.activeTab];
+    const rows = filterRowsByTab(buildAllPublishRows(), tabKey);
+    this.setData({
+      publishList: rows.map((item) => {
+        const offline = item.status === 'offline';
+        return {
+          ...item,
+          typeLabel: TYPE_LABELS[item.type] || item.type,
+          statusText: STATUS_TEXT[item.status] || item.status || '已发布',
+          canEdit: !offline && EDITABLE_TYPES.has(item.type),
+          canOffline: !offline,
+        };
+      }),
+    });
   },
 
   switchTab(e) {
@@ -41,52 +102,58 @@ Page({
     this.filterList();
   },
 
-  goPublish(e) {
-    const type = e.currentTarget.dataset.type;
-    const { publishLimit, publishUsed, membership } = this.data;
-
-    if (type === 'directory') {
-      wx.navigateTo({ url: '/pages/directory-apply/directory-apply' });
-      return;
-    }
-
-    if (!membership.active) {
-      promptUpgrade('免费用户无法发布供需信息，开通会员即可发布');
-      return;
-    }
-    if (publishLimit >= 0 && publishUsed >= publishLimit) {
-      showToast(`当前会员最多发布${publishLimit}条，请升级会员`);
-      return;
-    }
-
+  editItem(e) {
+    const { id, type } = e.currentTarget.dataset;
     const routes = {
-      factory: '/pages/factory-publish/factory-publish',
-      order: '/pages/publish-edit/publish-edit?type=order',
-      invest: '/pages/invest-publish/invest-publish',
-      directory: '/pages/directory-apply/directory-apply'
+      community: `/pages/community-post/community-post?id=${id}`,
+      factory: `/pages/factory-publish/factory-publish?mode=demand&id=${id}`,
+      factory_info: `/pages/factory-publish/factory-publish?mode=info&id=${id}`,
+      order: `/pages/publish-edit/publish-edit?id=${id}&type=order`,
+      order_demand: `/pages/order-demand-publish/order-demand-publish?id=${id}`,
+      invest: `/pages/invest-publish/invest-publish?id=${id}`,
+      storeSupply: '/pages/store-supply-publish/store-supply-publish',
+      storeDemand: '/pages/store-demand-publish/store-demand-publish',
+      directory: '/pages/directory-apply/directory-apply',
+      industry: '/pages/industry-apply/industry-apply',
+      influencer: '/pages/influencer-publish/influencer-publish',
     };
-    wx.navigateTo({ url: routes[type] });
+    const url = routes[type];
+    if (!url) {
+      showToast('暂不支持编辑，请删除后重新发布');
+      return;
+    }
+    wx.navigateTo({ url });
   },
 
-  editItem(e) {
-    const item = this.data.publishList[e.currentTarget.dataset.index];
-    wx.navigateTo({ url: `/pages/publish-edit/publish-edit?id=${item.id}&type=${item.type}` });
+  offlineItem(e) {
+    const { id, type } = e.currentTarget.dataset;
+    wx.showModal({
+      title: '确认下架',
+      content: '下架后前台将不再展示，可在「编辑」后重新上架',
+      success: (res) => {
+        if (!res.confirm) return;
+        const result = offlinePublishEntry(id, type);
+        if (result && result.ok === false) {
+          showToast(result.message);
+          return;
+        }
+        this.loadData();
+        showToast('已下架');
+      },
+    });
   },
 
   removeItem(e) {
-    const index = e.currentTarget.dataset.index;
+    const { id, type } = e.currentTarget.dataset;
     wx.showModal({
-      title: '确认下架',
-      content: '下架后其他用户将无法看到此信息',
+      title: '确认删除',
+      content: '删除后无法恢复，确定删除吗？',
       success: (res) => {
-        if (res.confirm) {
-          const list = wx.getStorageSync('myPublish') || [];
-          list.splice(index, 1);
-          wx.setStorageSync('myPublish', list);
-          this.loadData();
-          showToast('已下架');
-        }
-      }
+        if (!res.confirm) return;
+        removePublishEntry(id, type);
+        this.loadData();
+        showToast('已删除');
+      },
     });
-  }
+  },
 });

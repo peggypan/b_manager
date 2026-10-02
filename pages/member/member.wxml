@@ -2,7 +2,7 @@
   <view class="member-header">
     <text class="header-title">👑 企业会员</text>
     <text class="header-desc">付费解锁全平台B端资源联系方式</text>
-    <text class="current-plan" wx:if="{{membership.active}}">当前：{{membership.planName}} · 至 {{membership.expireDate}}</text>
+    <text class="current-plan" wx:if="{{membership.active}}">当前：{{membership.planName}} · 至 {{membership.expireLabel}}</text>
   </view>
 
   <view class="card free-card">

@@ -1,14 +1,15 @@
 const mock = require('../../services/mock');
+const localPublish = require('../../utils/localPublish');
 
 Page({
   data: {
     tabs: ['投资项目', '推广服务', '达人合作'],
     activeTab: 0,
-    list: mock.PROJECTS,
+    list: localPublish.getMergedProjects(),
     services: mock.MEDIA_SERVICES,
     platforms: ['全部', '抖音', '快手', '小红书'],
     activePlatform: 0,
-    influencers: mock.INFLUENCERS
+    influencers: [],
   },
 
   onLoad(options) {
@@ -19,17 +20,27 @@ Page({
     }
   },
 
+  onShow() {
+    this.refreshInfluencers();
+    this.setData({ list: localPublish.getMergedProjects() });
+  },
+
+  refreshInfluencers() {
+    const platform = this.data.platforms[this.data.activePlatform];
+    let influencers = localPublish.getMergedInfluencers();
+    if (platform && platform !== '全部') {
+      influencers = influencers.filter((i) => i.platform === platform);
+    }
+    this.setData({ influencers });
+  },
+
   switchTab(e) {
     this.setData({ activeTab: e.currentTarget.dataset.index });
   },
 
   filterPlatform(e) {
     const index = e.currentTarget.dataset.index;
-    const platform = this.data.platforms[index];
-    const list = platform === '全部'
-      ? mock.INFLUENCERS
-      : mock.INFLUENCERS.filter(i => i.platform === platform);
-    this.setData({ activePlatform: index, influencers: list });
+    this.setData({ activePlatform: index }, () => this.refreshInfluencers());
   },
 
   goDetail(e) {
@@ -46,5 +57,9 @@ Page({
 
   goInfluencerDetail(e) {
     wx.navigateTo({ url: `/pages/influencer-detail/influencer-detail?id=${e.currentTarget.dataset.id}` });
-  }
+  },
+
+  goInfluencerPublish() {
+    wx.navigateTo({ url: '/pages/influencer-publish/influencer-publish' });
+  },
 });

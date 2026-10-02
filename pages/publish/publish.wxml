@@ -1,50 +1,46 @@
 <view class="container">
-  <!-- 发布配额 -->
   <view class="quota-card card">
     <view class="flex-between">
-      <text class="quota-title">发布配额</text>
+      <text class="quota-title">我的发布</text>
       <text class="quota-num">{{publishUsed}} / {{publishLimit < 0 ? '不限' : publishLimit}}</text>
     </view>
-    <text class="quota-tip">{{membership.planName}} · 会员专属发布权限</text>
+    <text class="quota-tip">统一管理社区帖子、找工厂、找订单、门店货源/求购、宠业展厅、宠业创投、免费入驻等，支持编辑、下架、删除</text>
   </view>
 
-  <!-- 快速发布 -->
-  <view class="card">
-    <text class="section-title">发布新信息</text>
-    <view class="publish-grid">
-      <view class="publish-btn btn-blue-1" bindtap="goPublish" data-type="factory">
-        <text class="publish-icon">🏭</text><text>工厂需求</text>
-      </view>
-      <view class="publish-btn btn-blue-2" bindtap="goPublish" data-type="order">
-        <text class="publish-icon">📦</text><text>产品/订单</text>
-      </view>
-      <view class="publish-btn btn-blue-3" bindtap="goPublish" data-type="invest">
-        <text class="publish-icon">💼</text><text>投资项目</text>
-      </view>
-      <view class="publish-btn btn-blue-4" bindtap="goPublish" data-type="directory">
-        <text class="publish-icon">📇</text><text>黄页入驻</text>
-      </view>
-    </view>
-  </view>
-
-  <!-- 我的发布列表 -->
   <scroll-view scroll-x class="tab-scroll">
     <view class="tab-item {{activeTab === index ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="*this" bindtap="switchTab" data-index="{{index}}">{{item}}</view>
   </scroll-view>
 
   <view class="publish-list">
-    <view class="publish-item card" wx:for="{{publishList}}" wx:key="id">
+    <view class="publish-item card" wx:for="{{publishList}}" wx:key="{{item.type}}-{{item.id}}">
       <text class="publish-item-title">{{item.title}}</text>
-      <text class="publish-item-time">{{item.time}} · {{item.status === 'pending' ? '审核中' : '已发布'}}</text>
+      <text class="publish-item-time">{{item.typeLabel}} · {{item.time}} · {{item.statusText}}</text>
       <view class="publish-actions">
-        <text class="action-btn" bindtap="editItem" data-index="{{index}}">编辑</text>
-        <text class="action-btn danger" bindtap="removeItem" data-index="{{index}}">下架</text>
+        <text
+          class="action-btn"
+          wx:if="{{item.canEdit}}"
+          catchtap="editItem"
+          data-id="{{item.id}}"
+          data-type="{{item.type}}"
+        >编辑</text>
+        <text
+          class="action-btn warn"
+          wx:if="{{item.canOffline}}"
+          catchtap="offlineItem"
+          data-id="{{item.id}}"
+          data-type="{{item.type}}"
+        >下架</text>
+        <text
+          class="action-btn danger"
+          catchtap="removeItem"
+          data-id="{{item.id}}"
+          data-type="{{item.type}}"
+        >删除</text>
       </view>
     </view>
     <view class="empty-state" wx:if="{{publishList.length === 0}}">
       <text class="empty-icon">📝</text>
-      <text>暂无发布内容</text>
-      <text style="font-size:24rpx;color:#CBD5E1;margin-top:8rpx">开通会员即可发布供需信息</text>
+      <text>该分类暂无发布内容</text>
     </view>
   </view>
 </view>

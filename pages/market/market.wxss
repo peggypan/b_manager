@@ -19,3 +19,30 @@
 .list-intro { font-size: 26rpx; color: #64748B; display: block; line-height: 1.5; }
 .list-wrap { width: 100%; box-sizing: border-box; }
 .list-card { width: auto; box-sizing: border-box; }
+
+.fab-order {
+  position: fixed;
+  right: 32rpx;
+  bottom: calc(130rpx + env(safe-area-inset-bottom));
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 20rpx 32rpx;
+  border-radius: 44rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+  box-shadow: 0 8rpx 24rpx rgba(5, 150, 105, 0.38);
+}
+
+.fab-order-active {
+  transform: scale(0.96);
+  opacity: 0.94;
+}
+
+.fab-order-icon {
+  font-size: 32rpx;
+  line-height: 1;
+}

@@ -1,7 +1,7 @@
 <view class="container">
   <view class="tip-card card">
     <text class="tip-title">免费入驻</text>
-    <text class="tip-text">产业园、商协会均可免费入驻展示。审核通过后上线名片，联系方式需开通会员后对其他企业可见。</text>
+    <text class="tip-text">产业园、商协会均可免费入驻展示，提交后立即上线名片。联系方式需开通会员后对其他企业可见。</text>
   </view>
 
   <view class="card form-group">
@@ -40,8 +40,12 @@
       <input placeholder="联系人姓名" value="{{form.contact}}" bindinput="onInput" data-field="contact" />
     </view>
     <view class="form-item">
-      <text class="form-label">联系电话</text>
-      <input type="number" placeholder="联系电话" value="{{form.phone}}" bindinput="onInput" data-field="phone" />
+      <text class="form-label">联系电话 *</text>
+      <input type="number" placeholder="手机号或座机" value="{{form.phone}}" bindinput="onInput" data-field="phone" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">微信号 *</text>
+      <input placeholder="用于商务对接的微信号" value="{{form.wechat}}" bindinput="onInput" data-field="wechat" />
     </view>
   </view>
 

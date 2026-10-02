@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "达人入驻",
+  "usingComponents": {
+    "media-upload": "/components/media-upload/media-upload"
+  }
+}

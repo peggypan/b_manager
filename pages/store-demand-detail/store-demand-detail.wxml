@@ -37,6 +37,6 @@
 
   <view class="bottom-bar">
     <button class="btn-outline bar-btn" bindtap="{{isMember ? 'copyWechat' : 'goMember'}}">{{isMember ? '复制微信' : '开通会员'}}</button>
-    <button class="btn-primary bar-btn" bindtap="contactStore">{{isMember ? '联系门店供货' : '开通会员联系'}}</button>
+    <button class="btn-primary bar-btn" bindtap="contactStore">{{isMember ? '在线沟通' : '开通会员沟通'}}</button>
   </view>
 </view>

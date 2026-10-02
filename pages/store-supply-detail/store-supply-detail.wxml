@@ -71,7 +71,7 @@
   </view>
 
   <view class="bottom-bar">
-    <button class="btn-outline bar-btn" bindtap="consultDropship">咨询代发政策</button>
+    <button class="btn-outline bar-btn" bindtap="consultDropship">在线沟通</button>
     <button class="btn-primary bar-btn" bindtap="{{isMember ? 'callFactory' : 'goMember'}}">{{isMember ? '联系工厂拿货' : '开通会员联系'}}</button>
   </view>
 </view>

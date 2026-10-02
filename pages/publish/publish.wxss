@@ -29,4 +29,5 @@
 .publish-item-time { font-size: 22rpx; color: #94A3B8; display: block; margin: 8rpx 0 16rpx; }
 .publish-actions { display: flex; }
 .action-btn { font-size: 24rpx; color: #1A56DB; margin-right: 24rpx; padding: 8rpx 0; }
+.action-btn.warn { color: #D97706; margin-right: 24rpx; }
 .action-btn.danger { color: #EF4444; }

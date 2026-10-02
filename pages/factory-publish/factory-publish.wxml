@@ -1,10 +1,125 @@
-<view class="container">
+<!-- 工厂信息 · 列表预览 -->
+<block wx:if="{{mode === 'info'}}">
+  <view class="preview-label">列表预览（与找工厂页卡片一致）</view>
+  <view class="factory-card card preview-card">
+    <text class="card-title">{{form.name || '工厂名称'}}</text>
+    <view class="card-tags">
+      <text class="tag tag-blue">{{form.category || '品类'}}</text>
+      <text class="tag tag-green" wx:for="{{selectedTags}}" wx:key="*this">{{item}}</text>
+    </view>
+    <text class="card-meta">起订量 {{form.moq || '面议'}} · {{form.region || '所在地区'}}</text>
+    <view class="card-intro ellipsis-2">{{form.intro || '工厂简介将展示在这里'}}</view>
+    <view class="card-biz">
+      <text class="biz-tag" wx:for="{{selectedBiz}}" wx:key="*this">{{item}}</text>
+    </view>
+  </view>
+
   <view class="card form-group">
-    <view class="form-item"><text class="form-label">需求标题 *</text><input placeholder="如：寻找猫主粮OEM工厂" bindinput="onInput" data-field="title" /></view>
-    <view class="form-item"><text class="form-label">品类</text><input placeholder="如：主粮、零食" bindinput="onInput" data-field="category" /></view>
-    <view class="form-item"><text class="form-label">起订量</text><input placeholder="如：1000kg" bindinput="onInput" data-field="moq" /></view>
-    <view class="form-item"><text class="form-label">期望地区</text><input placeholder="如：不限、江浙沪" bindinput="onInput" data-field="region" /></view>
-    <view class="form-item"><text class="form-label">需求描述 *</text><textarea placeholder="详细描述您的采购或贴牌代工需求" bindinput="onInput" data-field="intro" /></view>
+    <view class="form-item">
+      <text class="form-label">工厂名称 *</text>
+      <input placeholder="如：宠安食品工厂" value="{{form.name}}" bindinput="onInput" data-field="name" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">品类 *</text>
+      <picker range="{{categories}}" bindchange="selectCategory">
+        <view class="picker">{{form.category || '请选择品类'}} ></view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">业务类型 *</text>
+      <view class="chip-row">
+        <text
+          class="chip {{selectedBiz.indexOf(item) >= 0 ? 'active' : ''}}"
+          wx:for="{{bizOptions}}"
+          wx:key="*this"
+          bindtap="toggleBiz"
+          data-value="{{item}}"
+        >{{item}}</text>
+      </view>
+    </view>
+    <view class="form-item">
+      <text class="form-label">能力标签</text>
+      <view class="chip-row">
+        <text
+          class="chip chip-green {{selectedTags.indexOf(item) >= 0 ? 'active' : ''}}"
+          wx:for="{{tagOptions}}"
+          wx:key="*this"
+          bindtap="toggleTag"
+          data-value="{{item}}"
+        >{{item}}</text>
+      </view>
+    </view>
+    <view class="form-item">
+      <text class="form-label">起订量</text>
+      <input placeholder="如：500kg、1000件" value="{{form.moq}}" bindinput="onInput" data-field="moq" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">所在地区</text>
+      <input placeholder="如：山东烟台" value="{{form.region}}" bindinput="onInput" data-field="region" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">工厂简介 *</text>
+      <textarea placeholder="主营、产能、合作优势等" value="{{form.intro}}" bindinput="onInput" data-field="intro" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">产能</text>
+      <input placeholder="如：月产2000吨" value="{{form.capacity}}" bindinput="onInput" data-field="capacity" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">资质认证</text>
+      <input placeholder="如：ISO9001、HACCP" value="{{form.cert}}" bindinput="onInput" data-field="cert" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">样品政策</text>
+      <input placeholder="如：免费打样3kg" value="{{form.samplePolicy}}" bindinput="onInput" data-field="samplePolicy" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">联系人 *</text>
+      <input placeholder="商务对接联系人" value="{{form.contact}}" bindinput="onInput" data-field="contact" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">联系电话 *</text>
+      <input type="number" placeholder="会员可见" value="{{form.phone}}" bindinput="onInput" data-field="phone" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">微信号 *</text>
+      <input placeholder="会员可见" value="{{form.wechat}}" bindinput="onInput" data-field="wechat" />
+    </view>
+  </view>
+
+  <view class="card media-card">
+    <text class="section-title">工厂实拍（选填）</text>
+    <media-upload max-images="{{6}}" image-label="上传工厂/产品图" video-label="上传厂区视频" bind:change="onMediaChange" />
+  </view>
+
+  <view class="submit-wrap">
+    <button class="btn-primary" bindtap="submit">{{editId ? '保存修改' : '发布工厂信息'}}</button>
+  </view>
+</block>
+
+<!-- 采购方 · 发工厂需求 -->
+<block wx:else>
+  <view class="card form-group">
+    <view class="form-item">
+      <text class="form-label">需求标题 *</text>
+      <input placeholder="如：寻找猫主粮OEM工厂" value="{{form.title}}" bindinput="onInput" data-field="title" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">品类</text>
+      <input placeholder="如：主粮、零食" value="{{form.category}}" bindinput="onInput" data-field="category" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">起订量</text>
+      <input placeholder="如：1000kg" value="{{form.moq}}" bindinput="onInput" data-field="moq" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">期望地区</text>
+      <input placeholder="如：不限、江浙沪" value="{{form.region}}" bindinput="onInput" data-field="region" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">需求描述 *</text>
+      <textarea placeholder="详细描述您的采购或贴牌代工需求" value="{{form.intro}}" bindinput="onInput" data-field="intro" />
+    </view>
   </view>
 
   <view class="card media-card">
@@ -12,5 +127,7 @@
     <media-upload max-images="{{6}}" image-label="上传参考图" video-label="上传参考视频" bind:change="onMediaChange" />
   </view>
 
-  <view class="submit-wrap"><button class="btn-primary" bindtap="submit">发布需求</button></view>
-</view>
+  <view class="submit-wrap">
+    <button class="btn-primary" bindtap="submit">{{editId ? '保存修改' : '发布需求'}}</button>
+  </view>
+</block>

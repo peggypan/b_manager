@@ -1,0 +1,14 @@
+@import '../factory-publish/factory-publish.wxss';
+
+.tip-card {
+  background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+  margin-bottom: 8rpx;
+}
+.tip-title { font-size: 30rpx; font-weight: bold; color: #5b21b6; display: block; }
+.tip-text { font-size: 24rpx; color: #6d28d9; display: block; margin-top: 8rpx; line-height: 1.5; }
+.preview-label { font-size: 24rpx; color: #94a3b8; padding: 8rpx 24rpx 0; }
+.preview-card { margin-top: 8rpx; }
+.influencer-card { padding: 24rpx; }
+.influencer-name { font-size: 32rpx; font-weight: bold; }
+.influencer-meta { font-size: 24rpx; color: #94A3B8; display: block; margin: 8rpx 0; }
+.influencer-mode { font-size: 26rpx; color: #1A56DB; display: block; margin-bottom: 8rpx; }

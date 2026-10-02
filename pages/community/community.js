@@ -1,5 +1,11 @@
 const mock = require('../../services/mock');
-const { getAllPosts, splitWaterfall } = require('../../utils/community');
+const {
+  getAllPosts,
+  splitWaterfall,
+  markPostsOwnership,
+  deletePost,
+} = require('../../utils/community');
+const { showToast } = require('../../utils/util');
 
 Page({
   data: {
@@ -7,7 +13,7 @@ Page({
     activeTab: 0,
     leftCol: [],
     rightCol: [],
-    keyword: ''
+    keyword: '',
   },
 
   onShow() {
@@ -23,16 +29,18 @@ Page({
     let list = getAllPosts();
 
     if (tabName !== '推荐') {
-      list = list.filter(p => p.category === tabName);
+      list = list.filter((p) => p.category === tabName);
     }
     if (keyword) {
-      list = list.filter(p =>
-        (p.title && p.title.includes(keyword)) ||
-        (p.content && p.content.includes(keyword)) ||
-        (p.tags && p.tags.some(t => t.includes(keyword)))
+      list = list.filter(
+        (p) =>
+          (p.title && p.title.includes(keyword)) ||
+          (p.content && p.content.includes(keyword)) ||
+          (p.tags && p.tags.some((t) => t.includes(keyword))),
       );
     }
 
+    list = markPostsOwnership(list);
     const { left, right } = splitWaterfall(list);
     this.setData({ leftCol: left, rightCol: right });
   },
@@ -53,5 +61,19 @@ Page({
 
   goPublish() {
     wx.navigateTo({ url: '/pages/community-post/community-post' });
-  }
+  },
+
+  confirmDeleteNote(e) {
+    const id = e.currentTarget.dataset.id;
+    wx.showModal({
+      title: '删除笔记',
+      content: '删除后无法恢复，确定删除吗？',
+      success: (res) => {
+        if (!res.confirm) return;
+        deletePost(id);
+        showToast('已删除');
+        this.loadFeed();
+      },
+    });
+  },
 });

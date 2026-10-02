@@ -3,6 +3,13 @@
  * @description 核心逻辑：免费用户只能看简介，会员解锁联系方式
  */
 
+const {
+  addYearsExpireDate,
+  formatExpireLabel,
+  isExpireDatePast,
+  normalizeExpireDate,
+} = require('./memberExpire');
+
 /** 会员等级配置 */
 const MEMBER_PLANS = [
   {
@@ -15,7 +22,7 @@ const MEMBER_PLANS = [
       '全平台查看所有企业、项目、达人联系方式',
       '可发布 3 条供需信息',
       '黄页基础展示，普通搜索排序',
-      '留言无限次'
+      '在线沟通无限次'
     ]
   },
   {
@@ -54,12 +61,18 @@ const PUBLISH_LIMIT = { free: 0, basic: 3, advanced: 15, vip: -1 };
 
 /**
  * 获取当前会员信息
- * @returns {{ level: string, active: boolean, expireDate: string, planName: string }}
+ * @returns {{ level: string, active: boolean, expireDate: string, expireLabel: string, planName: string }}
  */
 const getMembership = () => {
   const m = wx.getStorageSync('membership') || { level: 'free', active: false, expireDate: '' };
   const plan = MEMBER_PLANS.find(p => p.level === m.level);
-  return { ...m, planName: plan ? plan.name : '免费用户' };
+  const expireDate = normalizeExpireDate(m.expireDate);
+  return {
+    ...m,
+    expireDate,
+    expireLabel: formatExpireLabel(expireDate),
+    planName: plan ? plan.name : '免费用户',
+  };
 };
 
 /**
@@ -69,7 +82,7 @@ const getMembership = () => {
 const isMember = () => {
   const m = getMembership();
   if (!m.active) return false;
-  if (m.expireDate && new Date(m.expireDate) < new Date()) return false;
+  if (m.expireDate && isExpireDatePast(m.expireDate)) return false;
   return m.level !== 'free';
 };
 
@@ -103,12 +116,10 @@ const promptUpgrade = (tip) => {
  * @param {string} level - 会员等级 basic/advanced/vip
  */
 const activateMembership = (level) => {
-  const expire = new Date();
-  expire.setFullYear(expire.getFullYear() + 1);
   wx.setStorageSync('membership', {
     level,
     active: true,
-    expireDate: expire.toISOString().split('T')[0]
+    expireDate: addYearsExpireDate(1),
   });
 };
 

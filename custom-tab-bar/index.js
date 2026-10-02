@@ -14,7 +14,7 @@ Component({
       { pagePath: '/pages/user/user', text: '我的', icon: '/assets/tabbar/tab-user.jpg' }
     ],
     publishActions: [
-      { name: '发工厂需求', desc: '采购/贴牌/代工', icon: '🏭', theme: 'green', url: '/pages/factory-publish/factory-publish' },
+      { name: '发工厂需求', desc: '采购/贴牌/代工', icon: '🏭', theme: 'green', url: '/pages/factory-publish/factory-publish?mode=demand' },
       { name: '发产品订单', desc: '现货/代工方案', icon: '📦', theme: 'blue', url: '/pages/publish-edit/publish-edit?type=order' },
       { name: '发宠投项目', desc: '融资/合作立项', icon: '💼', theme: 'purple', url: '/pages/invest-publish/invest-publish' },
       { name: '发宠业货源', desc: '一件起批·工厂直发', icon: '🚚', theme: 'orange', url: '/pages/store-supply-publish/store-supply-publish' },
@@ -49,8 +49,8 @@ Component({
     },
 
     goMyPublish() {
-      this.setData({ showPublish: false });
-      wx.navigateTo({ url: '/pages/publish/publish' });
+      this.setData({ showPublish: false, selected: 2 });
+      wx.switchTab({ url: '/pages/publish/publish' });
     }
   }
 });

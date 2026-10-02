@@ -1,0 +1,13 @@
+@import '../factory-publish/factory-publish.wxss';
+
+.media-card {
+  margin-top: 24rpx;
+  padding: 24rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #334155;
+  display: block;
+  margin-bottom: 16rpx;
+}

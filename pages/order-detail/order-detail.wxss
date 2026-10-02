@@ -1,5 +1,19 @@
 .detail-title { font-size: 34rpx; font-weight: bold; display: block; }
+.detail-name { font-size: 36rpx; font-weight: bold; color: #1E293B; display: block; }
 .detail-sub { font-size: 26rpx; color: #94A3B8; display: block; margin: 8rpx 0; }
+.detail-meta { font-size: 24rpx; color: #94A3B8; display: block; margin-bottom: 12rpx; }
+.detail-tags { display: flex; flex-wrap: wrap; gap: 12rpx; margin: 16rpx 0; }
+.demand-tag {
+  font-size: 22rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 8rpx;
+  background: #ECFEFF;
+  color: #0891B2;
+}
+.demand-tag.category { background: #EFF6FF; color: #1A56DB; }
 .detail-intro { font-size: 28rpx; color: #64748B; line-height: 1.6; }
 .info-row { display: flex; padding: 12rpx 0; border-bottom: 1rpx solid #F8FAFC; font-size: 28rpx; }
 .info-label { width: 160rpx; color: #94A3B8; flex-shrink: 0; }
+.contact-lock { text-align: center; padding: 24rpx 0; }
+.lock-icon { font-size: 48rpx; display: block; }
+.lock-text { font-size: 26rpx; color: #94A3B8; display: block; margin: 12rpx 0 20rpx; }

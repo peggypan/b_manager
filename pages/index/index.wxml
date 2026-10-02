@@ -13,7 +13,7 @@
   </view>
   <view class="member-bar active" wx:else>
     <text class="member-bar-icon">✅</text>
-    <text class="member-bar-text">{{membership.planName}} · 有效期至 {{membership.expireDate}}</text>
+    <text class="member-bar-text">{{membership.planName}} · 有效期至 {{membership.expireLabel}}</text>
   </view>
 
   <!-- Banner -->

@@ -1,0 +1,49 @@
+<view class="container">
+  <view class="card form-group">
+    <view class="form-item">
+      <text class="form-label">需求标题 *</text>
+      <input placeholder="如：采购宠物零食 月订5000件" bindinput="onInput" data-field="title" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">企业/门店名称 *</text>
+      <input placeholder="您的公司或门店名" bindinput="onInput" data-field="company" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">品类</text>
+      <input placeholder="如：主粮、零食、用品" bindinput="onInput" data-field="category" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">采购量级</text>
+      <input placeholder="如：5000件/月" bindinput="onInput" data-field="moq" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">期望地区</text>
+      <input placeholder="如：全国、江浙沪" bindinput="onInput" data-field="region" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">需求描述 *</text>
+      <textarea placeholder="说明产品规格、合作方式、交货要求等" bindinput="onInput" data-field="intro" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">联系人 *</text>
+      <input placeholder="联系人姓名" bindinput="onInput" data-field="contact" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">联系电话 *</text>
+      <input type="number" placeholder="手机号或座机" bindinput="onInput" data-field="phone" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">微信号 *</text>
+      <input placeholder="用于对接的微信号" bindinput="onInput" data-field="wechat" />
+    </view>
+  </view>
+
+  <view class="card media-card">
+    <text class="section-title">参考素材（选填）</text>
+    <media-upload max-images="{{6}}" image-label="上传参考图" video-label="上传参考视频" bind:change="onMediaChange" />
+  </view>
+
+  <view class="submit-wrap">
+    <button class="btn-primary" bindtap="submit">发布到需求大厅</button>
+  </view>
+</view>

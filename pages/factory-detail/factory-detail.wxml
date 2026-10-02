@@ -15,7 +15,7 @@
 
   <view class="card">
     <text class="section-title">工厂信息</text>
-    <view class="info-row"><text class="info-label">业务类型</text><text>{{item.bizTypes.join('、')}}</text></view>
+    <view class="info-row"><text class="info-label">业务类型</text><text>{{bizTypesText}}</text></view>
     <view class="info-row"><text class="info-label">起订量</text><text>{{item.moq}}</text></view>
     <view class="info-row"><text class="info-label">所在地区</text><text>{{item.region}}</text></view>
     <view class="info-row"><text class="info-label">产能</text><text>{{item.capacity}}</text></view>
@@ -42,7 +42,7 @@
   </view>
 
   <view class="bottom-bar">
-    <button class="btn-outline bar-btn" bindtap="leaveMessage">留言沟通</button>
+    <button class="btn-outline bar-btn" bindtap="leaveMessage">在线沟通</button>
     <button class="btn-primary bar-btn" bindtap="{{isMember ? 'callPhone' : 'goMember'}}">{{isMember ? '立即联系' : '开通会员联系'}}</button>
   </view>
 </view>

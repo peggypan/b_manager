@@ -8,7 +8,8 @@
     <text class="section-title">预约信息</text>
     <view class="form-item"><text class="form-label">企业名称 *</text><input placeholder="您的企业名称" bindinput="onInput" data-field="company" /></view>
     <view class="form-item"><text class="form-label">联系人 *</text><input placeholder="联系人姓名" bindinput="onInput" data-field="contact" /></view>
-    <view class="form-item"><text class="form-label">联系电话 *</text><input type="number" placeholder="联系电话" bindinput="onInput" data-field="phone" /></view>
+    <view class="form-item"><text class="form-label">联系电话 *</text><input type="number" placeholder="手机号或座机" bindinput="onInput" data-field="phone" /></view>
+    <view class="form-item"><text class="form-label">微信号 *</text><input placeholder="用于商务对接的微信号" bindinput="onInput" data-field="wechat" /></view>
     <view class="form-item"><text class="form-label">需求描述</text><textarea placeholder="描述您的推广需求和预算" bindinput="onInput" data-field="demand" /></view>
   </view>
 
@@ -20,7 +21,10 @@
   <view class="card" wx:if="{{bookings.length > 0}}">
     <text class="section-title">预约记录</text>
     <view class="booking-item" wx:for="{{bookings}}" wx:key="id">
-      <text class="booking-name">{{item.serviceName}}</text>
+      <view class="flex-between">
+        <text class="booking-name">{{item.serviceName}}</text>
+        <text class="booking-delete" bindtap="removeBooking" data-id="{{item.id}}">删除</text>
+      </view>
       <text class="booking-meta">{{item.company}} · {{item.time}} · {{item.status === 'pending' ? '待对接' : '已对接'}}</text>
     </view>
   </view>

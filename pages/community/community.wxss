@@ -82,15 +82,31 @@ page {
   max-width: calc(50% - 8rpx);
 }
 
+.note-card-wrap {
+  position: relative;
+  margin-bottom: 16rpx;
+}
+
 .note-card {
   width: 100%;
   box-sizing: border-box;
   background: #fff;
   border-radius: 16rpx;
   overflow: hidden;
-  margin-bottom: 16rpx;
   box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
   position: relative;
+}
+
+.note-delete {
+  position: absolute;
+  top: 12rpx;
+  left: 12rpx;
+  z-index: 2;
+  padding: 6rpx 16rpx;
+  font-size: 22rpx;
+  color: #fff;
+  background: rgba(239, 68, 68, 0.88);
+  border-radius: 20rpx;
 }
 
 .note-cover {

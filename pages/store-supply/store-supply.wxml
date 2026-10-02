@@ -1,4 +1,4 @@
-<view class="container page-with-tabbar">
+<view class="container page-store-supply">
   <!-- 面向人群说明 -->
   <view class="hero-card card">
     <text class="hero-title">🏪 门店老板找货源</text>
@@ -63,9 +63,8 @@
     </block>
   </view>
 
-  <!-- 发布入口 -->
-  <view class="action-bar">
-    <button class="action-btn factory" bindtap="goFactoryPublish">工厂发布货源</button>
-    <button class="action-btn store" bindtap="goStoreDemand">门店发布求购</button>
+  <view class="fab-circle" bindtap="onPublishFabTap" hover-class="fab-circle-active">
+    <text class="fab-circle-icon">＋</text>
+    <text class="fab-circle-label">发布</text>
   </view>
 </view>

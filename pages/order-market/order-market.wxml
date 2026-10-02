@@ -1,9 +1,27 @@
-<view class="container">
+<view class="container page-order-market">
+  <view class="search-wrap">
+    <view class="search-row">
+      <input
+        class="search-input"
+        placeholder="搜索订单、工厂、品类、需求"
+        value="{{keyword}}"
+        bindinput="onSearchInput"
+        confirm-type="search"
+        bindconfirm="goSearchPage"
+      />
+      <text class="search-clear" wx:if="{{keyword}}" bindtap="clearSearch">清除</text>
+    </view>
+    <text class="search-link" bindtap="goSearchPage">全站搜订单 ›</text>
+  </view>
+
   <view class="tab-bar">
     <text class="tab-item {{activeTab === index ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="*this" bindtap="switchTab" data-index="{{index}}">{{item}}</text>
   </view>
 
   <block wx:if="{{activeTab === 0}}">
+    <view class="empty-state" wx:if="{{orders.length === 0}}">
+      <text>未找到匹配的订单/方案</text>
+    </view>
     <view class="card list-card" wx:for="{{orders}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
       <text class="card-title">{{item.title}}</text>
       <text class="card-sub">{{item.factoryName}} · {{item.type}}</text>
@@ -16,11 +34,23 @@
   </block>
 
   <block wx:else>
+    <view class="empty-state" wx:if="{{demands.length === 0}}">
+      <text>暂无匹配需求，可点击右下角发布找订单需求</text>
+    </view>
     <view class="card list-card" wx:for="{{demands}}" wx:key="id">
       <text class="card-title">{{item.title}}</text>
       <text class="card-sub">{{item.company}} · {{item.time}}</text>
+      <view class="card-meta-row" wx:if="{{item.category}}">
+        <text class="tag tag-green">{{item.category}}</text>
+        <text class="meta-text">{{item.region}} · {{item.moq}}</text>
+      </view>
       <view class="card-intro ellipsis-2">{{item.intro}}</view>
-      <button class="msg-btn" bindtap="goDetail" data-id="1">留言沟通</button>
+      <button class="msg-btn" catchtap="startDemandChat" data-id="{{item.id}}">在线沟通</button>
     </view>
   </block>
+
+  <view class="fab-order" bindtap="goPublishDemand" hover-class="fab-order-active">
+    <text class="fab-order-icon">📋</text>
+    <text>找订单</text>
+  </view>
 </view>

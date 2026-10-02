@@ -1,5 +1,24 @@
+@import '../factory/factory.wxss';
+
+.preview-label {
+  font-size: 24rpx;
+  color: #94A3B8;
+  padding: 16rpx 24rpx 0;
+}
+.preview-card { margin-top: 8rpx; }
 .form-item { padding: 20rpx 0; border-bottom: 1rpx solid #F1F5F9; }
 .form-label { font-size: 28rpx; color: #64748B; display: block; margin-bottom: 12rpx; }
 .form-item input, .form-item textarea { font-size: 30rpx; width: 100%; }
 .form-item textarea { height: 200rpx; }
-.submit-wrap { padding: 40rpx 48rpx; }
+.picker { font-size: 30rpx; color: #334155; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 12rpx; }
+.chip {
+  padding: 10rpx 24rpx;
+  font-size: 26rpx;
+  color: #64748B;
+  background: #F1F5F9;
+  border-radius: 32rpx;
+}
+.chip.active { background: #EFF6FF; color: #1A56DB; }
+.chip-green.active { background: #ECFDF5; color: #059669; }
+.submit-wrap { padding: 40rpx 48rpx 80rpx; }

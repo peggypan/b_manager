@@ -6,5 +6,6 @@
 .form-item textarea { height: 160rpx; }
 .booking-item { padding: 16rpx 0; border-bottom: 1rpx solid #F1F5F9; }
 .booking-name { font-size: 28rpx; display: block; }
-.booking-meta { font-size: 24rpx; color: #94A3B8; }
+.booking-meta { font-size: 24rpx; color: #94A3B8; display: block; margin-top: 6rpx; }
+.booking-delete { font-size: 24rpx; color: #ef4444; flex-shrink: 0; }
 .submit-wrap { padding: 40rpx 48rpx; }

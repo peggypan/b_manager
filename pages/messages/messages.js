@@ -1,32 +1,42 @@
-const { showToast } = require('../../utils/util');
+const chat = require('../../utils/chat');
 
 Page({
   data: {
-    tabs: ['留言', '平台通知', '合作意向'],
+    tabs: ['会话', '平台通知', '合作意向'],
     activeTab: 0,
-    messages: [
-      { id: 1, type: 'leave', from: '喵星品牌', content: '您好，我们对贵司OEM服务感兴趣', time: '09-12 14:30', read: false },
-      { id: 2, type: 'notice', from: '平台通知', content: '您的企业入驻申请正在审核中', time: '09-10 09:00', read: true },
-      { id: 3, type: 'intent', from: '汪星人连锁', content: '意向合作：采购冻干零食', time: '09-08 16:20', read: false }
+    sessions: [],
+    notices: [
+      { id: 1, from: '平台通知', content: '您的企业入驻申请正在审核中', time: '09-10 09:00', read: true },
+      { id: 2, from: '平台通知', content: '会员将于 30 天后到期，请及时续费', time: '09-01 10:00', read: true },
     ],
-    compose: { target: '', content: '' },
-    showCompose: false
+    intents: [
+      { id: 1, from: '汪星人连锁', content: '意向合作：采购冻干零食', time: '09-08 16:20', read: false },
+    ],
   },
 
-  onLoad(options) {
-    if (options.action === 'compose') this.setData({ showCompose: true });
+  onShow() {
+    this.loadSessions();
   },
 
-  switchTab(e) { this.setData({ activeTab: e.currentTarget.dataset.index }); },
-
-  onComposeInput(e) {
-    this.setData({ [`compose.${e.currentTarget.dataset.field}`]: e.detail.value });
+  loadSessions() {
+    const sessions = chat.listSessions().map((s) => ({
+      ...s,
+      updatedAtText: s.updatedAt ? chat.formatTime(new Date(s.updatedAt)) : '',
+    }));
+    this.setData({ sessions });
   },
 
-  sendMessage() {
-    const { compose } = this.data;
-    if (!compose.content) { showToast('请输入留言内容'); return; }
-    showToast('留言已发送');
-    this.setData({ showCompose: false, 'compose.content': '' });
-  }
+  switchTab(e) {
+    this.setData({ activeTab: e.currentTarget.dataset.index });
+  },
+
+  openSession(e) {
+    const { id, name, type, subtitle } = e.currentTarget.dataset;
+    chat.openChat({
+      targetId: id,
+      targetName: name,
+      targetType: type,
+      subtitle: subtitle || '',
+    });
+  },
 });

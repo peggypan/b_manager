@@ -37,7 +37,7 @@
     </view>
   </view>
   <view class="bottom-bar">
-    <button class="btn-outline bar-btn" bindtap="leaveMessage">留言沟通</button>
+    <button class="btn-outline bar-btn" bindtap="leaveMessage">在线沟通</button>
     <button class="btn-primary bar-btn" bindtap="{{isMember ? 'callPhone' : 'goMember'}}">{{isMember ? '立即联系' : '开通会员'}}</button>
   </view>
 </view>

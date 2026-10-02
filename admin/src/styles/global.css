@@ -1,0 +1,227 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: #f0f4f8;
+}
+
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.brand-title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+}
+
+.brand-sub {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+  height: 56px;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-content {
+  margin: 16px;
+  padding: 20px 24px 28px;
+  background: #fff;
+  border-radius: 12px;
+  min-height: calc(100vh - 56px - 32px);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.page-header-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.page-header-extra {
+  flex-shrink: 0;
+}
+
+.list-toolbar {
+  margin-bottom: 16px;
+}
+
+.menu-label-with-badge {
+  display: inline-flex;
+  align-items: center;
+}
+
+.stat-card {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.stat-card-clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card-clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.stat-card-clickable:active {
+  transform: translateY(0);
+}
+
+.content-stat-card-clickable {
+  cursor: pointer;
+}
+
+.content-stat-card-clickable:hover .content-stat-link {
+  color: #1d4ed8;
+}
+
+.stat-card-primary {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%) !important;
+}
+
+.stat-card-warn {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%) !important;
+}
+
+.stat-card-success {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%) !important;
+}
+
+.stat-card-neutral {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+}
+
+.quick-link-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #1e293b;
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.quick-link-card:hover {
+  border-color: #93c5fd;
+  box-shadow: 0 4px 12px rgba(26, 86, 219, 0.08);
+  color: #1a56db;
+}
+
+.quick-link-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #1a56db;
+}
+
+.content-stat-card .ant-statistic-content {
+  margin-bottom: 8px;
+}
+
+.content-stat-link {
+  font-size: 13px;
+  color: #1a56db;
+}
+
+.content-stat-link .anticon {
+  font-size: 11px;
+  margin-left: 4px;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(26, 86, 219, 0.35), transparent 45%),
+    radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.25), transparent 40%),
+    linear-gradient(145deg, #0f172a 0%, #1e3a8a 55%, #1a56db 100%);
+}
+
+.login-panel {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 48px;
+  max-width: 960px;
+  width: 100%;
+  align-items: center;
+}
+
+.login-hero {
+  padding: 12px 8px;
+}
+
+.login-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+
+.login-card {
+  border-radius: 16px !important;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.25);
+}
+
+@media (max-width: 768px) {
+  .login-panel {
+    grid-template-columns: 1fr;
+  }
+  .login-hero {
+    text-align: center;
+  }
+}

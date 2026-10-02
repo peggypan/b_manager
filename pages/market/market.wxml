@@ -26,4 +26,9 @@
       <text>暂无相关信息</text>
     </view>
   </view>
+
+  <view class="fab-order" bindtap="goOrderMarket" hover-class="fab-order-active">
+    <text class="fab-order-icon">📋</text>
+    <text>找订单</text>
+  </view>
 </view>

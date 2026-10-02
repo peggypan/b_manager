@@ -61,3 +61,4 @@
 .influencer-mode { font-size: 26rpx; color: #1A56DB; display: block; margin-bottom: 8rpx; }
 .influencer-intro { font-size: 26rpx; color: #64748B; display: block; }
 .influencer-cases { font-size: 24rpx; color: #94A3B8; display: block; margin-top: 8rpx; }
+.fab-influencer { background: #7C3AED; box-shadow: 0 8rpx 24rpx rgba(124, 58, 237, 0.4); }

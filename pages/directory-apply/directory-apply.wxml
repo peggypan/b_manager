@@ -1,6 +1,6 @@
 <view class="container">
   <view class="tip-card card">
-    <text>免费入驻企业黄页，审核通过后展示企业名片。联系方式需开通会员后对其他企业可见。</text>
+    <text>免费入驻企业黄页，提交后立即展示企业名片。联系方式需开通会员后对其他企业可见。</text>
   </view>
   <view class="card form-group">
     <view class="form-item"><text class="form-label">企业名称 *</text><input placeholder="请输入企业全称" bindinput="onInput" data-field="name" /></view>
@@ -12,8 +12,9 @@
     <view class="form-item"><text class="form-label">所在地区</text><input placeholder="如：广东广州" bindinput="onInput" data-field="region" /></view>
     <view class="form-item"><text class="form-label">企业简介</text><textarea placeholder="介绍企业优势和主营业务" bindinput="onInput" data-field="intro" /></view>
     <view class="form-item"><text class="form-label">主营产品/服务</text><input placeholder="如：OEM代工、品牌代理" bindinput="onInput" data-field="products" /></view>
-    <view class="form-item"><text class="form-label">联系人 *</text><input placeholder="联系人姓名" bindinput="onInput" data-field="contact" /></view>
-    <view class="form-item"><text class="form-label">联系电话</text><input type="number" placeholder="联系电话" bindinput="onInput" data-field="phone" /></view>
+    <view class="form-item"><text class="form-label">联系人 *</text><input placeholder="联系人姓名" value="{{form.contact}}" bindinput="onInput" data-field="contact" /></view>
+    <view class="form-item"><text class="form-label">联系电话 *</text><input type="number" placeholder="手机号或座机" value="{{form.phone}}" bindinput="onInput" data-field="phone" /></view>
+    <view class="form-item"><text class="form-label">微信号 *</text><input placeholder="用于商务对接的微信号" value="{{form.wechat}}" bindinput="onInput" data-field="wechat" /></view>
   </view>
 
   <view class="card media-card">

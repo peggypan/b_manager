@@ -1,6 +1,15 @@
 const mock = require('../../services/mock');
 const {
-  getPostById, getComments, addComment, isLiked, toggleLike, isFollowing, toggleFollow
+  getPostById,
+  getComments,
+  addComment,
+  deleteComment,
+  deletePost,
+  isUserPostId,
+  isLiked,
+  toggleLike,
+  isFollowing,
+  toggleFollow,
 } = require('../../utils/community');
 const { getUserProfile } = require('../../utils/userProfile');
 const { showToast } = require('../../utils/util');
@@ -18,18 +27,23 @@ Page({
     emojis: mock.COMMUNITY_EMOJIS,
     scrollTo: '',
     replyTo: null,
-    inputFocus: false
+    inputFocus: false,
+    canDeletePost: false,
+    myNickname: '',
   },
 
   onLoad(options) {
     const post = getPostById(options.id);
     if (!post) return;
     this.postId = post.id;
+    const profile = getUserProfile();
     this.setData({
       post,
       liked: isLiked(post.id),
       followed: isFollowing(post.author),
-      likeCount: post.likes || 0
+      likeCount: post.likes || 0,
+      canDeletePost: isUserPostId(post.id),
+      myNickname: profile.nickname,
     });
     this.seedDemoComments();
     wx.setNavigationBarTitle({ title: post.title.slice(0, 12) });
@@ -69,10 +83,41 @@ Page({
   },
 
   loadComments() {
-    const comments = getComments(this.postId);
+    const nickname = this.data.myNickname || getUserProfile().nickname;
+    const comments = getComments(this.postId).map((c) => ({
+      ...c,
+      isMine: c.author === nickname,
+    }));
     this.setData({
       comments,
-      scrollTo: comments.length ? `c${comments.length - 1}` : ''
+      scrollTo: comments.length ? `c${comments.length - 1}` : '',
+    });
+  },
+
+  confirmDeletePost() {
+    wx.showModal({
+      title: '删除笔记',
+      content: '删除后无法恢复，确定删除吗？',
+      success: (res) => {
+        if (!res.confirm) return;
+        deletePost(this.postId);
+        showToast('已删除');
+        setTimeout(() => wx.navigateBack(), 600);
+      },
+    });
+  },
+
+  confirmDeleteComment(e) {
+    const commentId = e.currentTarget.dataset.id;
+    wx.showModal({
+      title: '删除评论',
+      content: '确定删除这条评论吗？',
+      success: (res) => {
+        if (!res.confirm) return;
+        deleteComment(this.postId, commentId);
+        this.loadComments();
+        showToast('已删除');
+      },
     });
   },
 
